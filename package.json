@@ -13,8 +13,7 @@
     "dev": "concurrently \"pnpm webxdc-dev\" \"pnpm vite-dev\""
   },
   "dependencies": {
-    "@brajkowski/connect4-logic": "^1.0.6",
-    "connect4-engine": "^1.0.6",
+    "lodash": "^4.17.21",
     "phaser": "^3.55.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
