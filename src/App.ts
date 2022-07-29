@@ -1,7 +1,6 @@
 import GameScene from './Scenes/GameScene'
 import MenuScene from './Scenes/MenuScene'
 import 'phaser'
-import 'uno.css'
 
 export const config = {
   type: Phaser.AUTO,
