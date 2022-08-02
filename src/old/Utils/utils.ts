@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type { PositionInPixel, PositionInTile, ScoreTypes, TileNumbers } from '../game.interfaces'
 import { PIECE_TYPES } from '../game.interfaces'
 import type Piece from '../Game/Piece'
@@ -23,7 +24,7 @@ export function convertTileToPosition(positionInTile: PositionInTile): PositionI
   const y = positionInTile.tileY * TILE.HEIGHT + INITIAL_BOARD_SCREEN.HEIGHT
   return { x, y }
 }
-export function getPieceHashColor(piece: Piece): string {
+export function getPieceHashColor(piece: Piece): string | null {
   switch (piece.pieceTypeByLetter) {
     case 'w':
       return '#cdeff6'
@@ -65,7 +66,7 @@ export function getPieceTypeEnum(type: string): PIECE_TYPES | null {
       return null
   }
 }
-export function getPieceTypeNumber(type: string): number {
+export function getPieceTypeNumber(type: string): number | null {
   switch (type) {
     case 'w':
       return 0
