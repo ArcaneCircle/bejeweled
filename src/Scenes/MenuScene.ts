@@ -1,5 +1,5 @@
 import 'phaser'
-import { BACKGROUND, HALF_SCREEN } from '../Utils/gameValues'
+import { HALF_SCREEN } from '../Utils/gameValues'
 
 export default class MenuScene extends Phaser.Scene {
   // private playerCarsGroup: Phaser.GameObjects.Group;
