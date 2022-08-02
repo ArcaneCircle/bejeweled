@@ -2,7 +2,6 @@
 import 'phaser'
 import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js'
 import Bejeweled from 'phaser3-rex-plugins/templates/bejeweled/Bejeweled.js'
-import 'uno.css'
 
 class Demo extends Phaser.Scene {
   rexBoard!: BoardPlugin
@@ -17,7 +16,7 @@ class Demo extends Phaser.Scene {
   create() {
     const bejeweled = new Bejeweled(this, {
       // debug: true, // Show state changed log
-    //   input: false,
+      //   input: false,
       board: {
         grid: {
           gridType: 'quadGrid',
@@ -44,7 +43,7 @@ class Demo extends Phaser.Scene {
           const scene = board.scene as Demo
           const gameObject = scene.rexBoard.add.shape(board, 0, 0, 0, 0x0, 1, false)
             .setScale(0.95)
-          // Initial 'symbol' value
+            // Initial 'symbol' value
             .setData('symbol', undefined)
           // Symbol is stored in gameObject's data manager (`gameObject.getData('symbol')`)
           // Add data changed event to change the appearance of game object via new symbol value
