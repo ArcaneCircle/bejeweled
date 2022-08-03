@@ -10,7 +10,7 @@ export const config = {
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: 1920,
     height: 1720,
-    backgroundColor: '#000000',
+    backgroundColor: '#df8e73',
   },
   physics: {
     default: 'arcade',
