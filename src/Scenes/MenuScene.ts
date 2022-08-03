@@ -17,7 +17,7 @@ export default class MenuScene extends Phaser.Scene {
 
   create() {
     // this.add.image(0, 0, 'background').setDepth(1).setOrigin(0, 0)
-    this.cameras.main.setBackgroundColor('#df8e73')
+    this.cameras.main.setBackgroundColor('#000')
     this.add.image(HALF_SCREEN.WIDTH - 640, 150, 'logo').setDepth(1).setOrigin(0, 0)
 
     this.add.text(HALF_SCREEN.WIDTH - 300, HALF_SCREEN.HEIGHT + 200, 'Press any key to start', { font: 'bold 53px Geneva', color: 'white' }).setDepth(1)
