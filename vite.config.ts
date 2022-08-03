@@ -15,4 +15,5 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
   },
+  assetsInclude: [`${path.resolve(__dirname, 'src', 'assets')}/`],
 })
