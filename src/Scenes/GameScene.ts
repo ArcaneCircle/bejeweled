@@ -2,8 +2,26 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 /* eslint-disable import/no-mutable-exports */
 import 'phaser'
-import { INITIAL_BOARD_SCREEN, TILE } from '../Utils/gameValues'
+
 import GameManager, { gameManager } from '../Game/GameManager'
+import { INITIAL_BOARD_SCREEN, TILE } from '../Utils/gameValues'
+
+import backgroundBoard from '~/assets/background_board.png'
+import Border from '~/assets/Border.png'
+import selectedTile from '~/assets/selectedTile.png'
+import ScoreBoard from '~/assets/ScoreBoard.png'
+import ScoreBorder from '~/assets/ScoreBorder.png'
+import LevelBarBackground from '~/assets/levelBarBackground.png'
+import LevelBar from '~/assets/levelbar.jpg'
+import ButtonReset from '~/assets/buttonReset.png'
+import ButtonMenu from '~/assets/buttonMenu.png'
+import RestartButton from '~/assets/restartBtn.png'
+import ScoreMenu from '~/assets/scoreMenu.jpg'
+import bubble1 from '~/assets/bubble_single_1.mp3'
+import bubble2 from '~/assets/bubble_single_2.mp3'
+import bubble3 from '~/assets/bubble_single_3.mp3'
+import levelUpSound from '~/assets/levelUpSound.mp3'
+import pieces from '~/assets/pieces.png'
 
 export let gameScene: Phaser.Scene
 export let scoreText, levelText
@@ -18,24 +36,24 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('backgroundBoard', 'src/assets/background_board.png')
-    this.load.image('Border', 'src/assets/Border.png')
-    this.load.image('selectedTile', 'src/assets/selectedTile.png')
-    this.load.image('ScoreBoard', 'src/assets/ScoreBoard.png')
-    this.load.image('ScoreBorder', 'src/assets/ScoreBorder.png')
-    this.load.image('LevelBarBackground', 'src/assets/levelBarBackground.png')
-    this.load.image('LevelBar', 'src/assets/levelbar.jpg')
-    this.load.image('ButtonReset', 'src/assets/buttonReset.png')
-    this.load.image('ButtonMenu', 'src/assets/buttonMenu.png')
-    this.load.image('RestartButton', 'src/assets/restartBtn.png')
-    this.load.image('ScoreMenu', 'src/assets/scoreMenu.jpg')
+    this.load.image('backgroundBoard', backgroundBoard)
+    this.load.image('Border', Border)
+    this.load.image('selectedTile', selectedTile)
+    this.load.image('ScoreBoard', ScoreBoard)
+    this.load.image('ScoreBorder', ScoreBorder)
+    this.load.image('LevelBarBackground', LevelBarBackground)
+    this.load.image('LevelBar', LevelBar)
+    this.load.image('ButtonReset', ButtonReset)
+    this.load.image('ButtonMenu', ButtonMenu)
+    this.load.image('RestartButton', RestartButton)
+    this.load.image('ScoreMenu', ScoreMenu)
 
-    this.load.audio('bubble1', 'src/assets/bubble_single_1.mp3')
-    this.load.audio('bubble2', 'src/assets/bubble_single_2.mp3')
-    this.load.audio('bubble3', 'src/assets/bubble_single_3.mp3')
-    this.load.audio('levelUpSound', 'src/assets/levelUpSound.mp3')
+    this.load.audio('bubble1', bubble1)
+    this.load.audio('bubble2', bubble2)
+    this.load.audio('bubble3', bubble3)
+    this.load.audio('levelUpSound', levelUpSound)
 
-    this.load.spritesheet('pieces_spritesheet', 'src/assets/pieces.png', {
+    this.load.spritesheet('pieces_spritesheet', pieces, {
       frameWidth: TILE.WIDTH,
       frameHeight: TILE.HEIGHT,
     })
