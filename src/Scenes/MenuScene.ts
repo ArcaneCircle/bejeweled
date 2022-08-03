@@ -18,9 +18,11 @@ export default class MenuScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.setBackgroundColor('#000')
-    this.add.image(HALF_SCREEN.WIDTH - 640, 150, 'logo').setDepth(1).setOrigin(0, 0)
+    this.add.image(HALF_SCREEN.WIDTH - 640, 150, 'logo').setDepth(1).setOrigin(0, 0).setDisplaySize(1200, 250)
 
-    this.add.text(HALF_SCREEN.WIDTH - 300, HALF_SCREEN.HEIGHT + 200, 'Press any key to start', { font: 'bold 53px Geneva', color: 'white' }).setDepth(1)
+    // this.add.text(HALF_SCREEN.WIDTH, 150, 'BEJEWELED', { font: 'bold 250px monospace' }).setDepth(1).setOrigin(0.5, 0)
+
+    this.add.text(HALF_SCREEN.WIDTH - 300, HALF_SCREEN.HEIGHT + 200, 'Press any key to start', { font: 'bold 53px monospace', color: 'white' }).setDepth(1)
 
     this.input.on('pointerup', () => {
       this.scene.start('GameScene')
