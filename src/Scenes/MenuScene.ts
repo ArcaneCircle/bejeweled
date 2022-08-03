@@ -1,7 +1,7 @@
 import 'phaser'
 import { HALF_SCREEN } from '../Utils/gameValues'
 
-import title from '/Bejeweled_title.png'
+import title from '/assets/Bejeweled_title.png'
 
 export default class MenuScene extends Phaser.Scene {
   // private playerCarsGroup: Phaser.GameObjects.Group;

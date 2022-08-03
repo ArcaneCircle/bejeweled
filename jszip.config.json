@@ -4,12 +4,13 @@
   "entries": [
     "dist/assets",
     "dist/index.html",
-    "icon.png",
-    "manifest.toml"
+    "manifest.toml",
+    "icon.png"
   ],
   "force": true,
   "ignoreEntries": [
-    "*.map"
+    "*.map",
+    "dist/package.xdc"
   ],
   "mode": "add",
   "outputEntry": "dist/package.xdc",
