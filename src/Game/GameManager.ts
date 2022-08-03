@@ -231,11 +231,11 @@ export default class GameManager {
   }
 
   public gameOver() {
-    const scoreMenu = gameScene.add.image(INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH / 2 - 20, 500, 'ScoreMenu').setDepth(1).setOrigin(0, 0)
-    const buttonMenu = gameScene.add.image(scoreMenu.x + (scoreMenu.width / 2) - 188, scoreMenu.y + 250, 'RestartButton').setDepth(1).setOrigin(0, 0)
+    const scoreMenu = gameScene.add.image(INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH / 2 - 20, 500, 'ScoreMenu').setDepth(1).setOrigin(0, 0).setScale(2)
+    const buttonMenu = gameScene.add.image(scoreMenu.x + scoreMenu.width - 188, scoreMenu.y + 250, 'RestartButton').setDepth(1).setOrigin(0, 0)
     buttonMenu.setInteractive({ useHandCursor: true })
 
-    const scoreText = gameScene.add.text(scoreMenu.x + (scoreMenu.width / 2), scoreMenu.y + 200, this.score.toString(), { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0, 0)
+    const scoreText = gameScene.add.text(scoreMenu.x + (scoreMenu.width / 2) * 2, scoreMenu.y + 200, this.score.toString(), { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0, 0)
 
     buttonMenu.on('pointerup', () => {
       buttonMenu.destroy()
