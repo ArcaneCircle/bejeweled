@@ -1,6 +1,8 @@
 import 'phaser'
 import { HALF_SCREEN } from '../Utils/gameValues'
 
+import title from '/Bejeweled_title.png'
+
 export default class MenuScene extends Phaser.Scene {
   // private playerCarsGroup: Phaser.GameObjects.Group;
 
@@ -9,7 +11,7 @@ export default class MenuScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('logo', 'src/assets/Bejeweled_title.png')
+    this.load.image('logo', title)
 
     // this.menuGameOver = this.add.group();
   }
