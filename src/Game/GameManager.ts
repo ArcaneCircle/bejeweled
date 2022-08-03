@@ -46,6 +46,8 @@ export default class GameManager {
 
   public reset() {
     map.resetMap()
+    // send score before reset
+    window.highscores.setScore(this.score)
     this.resetScoreAndLevel()
     // this.gameOver()
   }
@@ -237,6 +239,8 @@ export default class GameManager {
     buttonMenu.setInteractive({ useHandCursor: true })
 
     const scoreText = gameScene.add.text(scoreMenu.x + (scoreMenu.width / 2) * 2, scoreMenu.y + 200, this.score.toString(), { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0, 0)
+
+    window.highscores.setScore(this.score)
 
     buttonMenu.on('pointerup', () => {
       buttonMenu.destroy()
