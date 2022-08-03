@@ -18,24 +18,24 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('backgroundBoard', 'assets/background_board.png')
-    this.load.image('Border', 'assets/Border.png')
-    this.load.image('selectedTile', 'assets/selectedTile.png')
-    this.load.image('ScoreBoard', 'assets/ScoreBoard.png')
-    this.load.image('ScoreBorder', 'assets/ScoreBorder.png')
-    this.load.image('LevelBarBackground', 'assets/levelBarBackground.png')
-    this.load.image('LevelBar', 'assets/levelbar.jpg')
-    this.load.image('ButtonReset', 'assets/buttonReset.png')
-    this.load.image('ButtonMenu', 'assets/buttonMenu.png')
-    this.load.image('RestartButton', 'assets/restartBtn.png')
-    this.load.image('ScoreMenu', 'assets/scoreMenu.jpg')
+    this.load.image('backgroundBoard', 'src/assets/background_board.png')
+    this.load.image('Border', 'src/assets/Border.png')
+    this.load.image('selectedTile', 'src/assets/selectedTile.png')
+    this.load.image('ScoreBoard', 'src/assets/ScoreBoard.png')
+    this.load.image('ScoreBorder', 'src/assets/ScoreBorder.png')
+    this.load.image('LevelBarBackground', 'src/assets/levelBarBackground.png')
+    this.load.image('LevelBar', 'src/assets/levelbar.jpg')
+    this.load.image('ButtonReset', 'src/assets/buttonReset.png')
+    this.load.image('ButtonMenu', 'src/assets/buttonMenu.png')
+    this.load.image('RestartButton', 'src/assets/restartBtn.png')
+    this.load.image('ScoreMenu', 'src/assets/scoreMenu.jpg')
 
-    this.load.audio('bubble1', 'assets/bubble_single_1.mp3')
-    this.load.audio('bubble2', 'assets/bubble_single_2.mp3')
-    this.load.audio('bubble3', 'assets/bubble_single_3.mp3')
-    this.load.audio('levelUpSound', 'assets/levelUpSound.mp3')
+    this.load.audio('bubble1', 'src/assets/bubble_single_1.mp3')
+    this.load.audio('bubble2', 'src/assets/bubble_single_2.mp3')
+    this.load.audio('bubble3', 'src/assets/bubble_single_3.mp3')
+    this.load.audio('levelUpSound', 'src/assets/levelUpSound.mp3')
 
-    this.load.spritesheet('pieces_spritesheet', 'assets/pieces.png', {
+    this.load.spritesheet('pieces_spritesheet', 'src/assets/pieces.png', {
       frameWidth: TILE.WIDTH,
       frameHeight: TILE.HEIGHT,
     })
