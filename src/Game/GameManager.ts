@@ -8,7 +8,9 @@ import type { PositionInPixel, PositionInTile, ScoreTypes, TileNumbers } from '.
 import { INITIAL_BOARD_SCREEN, LEVEL_SCORE_TO_ADD, PIECE_TYPES, TILE } from '../Utils/gameValues'
 import Map, { map } from './Map'
 import Piece from './Piece'
-// import * as gv from '../Utils/gameValues';
+
+import './webxdc-scores.js'
+
 // eslint-disable-next-line import/prefer-default-export
 export let gameManager: GameManager
 
