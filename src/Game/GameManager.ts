@@ -45,6 +45,7 @@ export default class GameManager {
   public reset() {
     map.resetMap()
     this.resetScoreAndLevel()
+    // this.gameOver()
   }
 
   public changeCurrentSelectedPiece(newPiece: Piece): Piece {
@@ -234,9 +235,12 @@ export default class GameManager {
     const buttonMenu = gameScene.add.image(scoreMenu.x + (scoreMenu.width / 2) - 188, scoreMenu.y + 250, 'RestartButton').setDepth(1).setOrigin(0, 0)
     buttonMenu.setInteractive({ useHandCursor: true })
 
+    const scoreText = gameScene.add.text(scoreMenu.x + (scoreMenu.width / 2), scoreMenu.y + 200, this.score.toString(), { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0, 0)
+
     buttonMenu.on('pointerup', () => {
       buttonMenu.destroy()
       scoreMenu.destroy()
+      scoreText.destroy()
       this.reset()
     })
   }
