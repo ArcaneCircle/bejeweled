@@ -20,7 +20,7 @@ import ScoreMenu from '/assets/scoreMenu.jpg'
 import bubble1 from '/assets/bubble_single_1.mp3'
 import bubble2 from '/assets/bubble_single_2.mp3'
 import bubble3 from '/assets/bubble_single_3.mp3'
-import levelUpSound from '/assets/levelUpSound.mp3'
+// import levelUpSound from '/assets/levelUpSound.mp3'
 import pieces from '/assets/pieces.png'
 
 export let gameScene: Phaser.Scene
@@ -51,7 +51,7 @@ export default class GameScene extends Phaser.Scene {
     this.load.audio('bubble1', bubble1)
     this.load.audio('bubble2', bubble2)
     this.load.audio('bubble3', bubble3)
-    this.load.audio('levelUpSound', levelUpSound)
+    // this.load.audio('levelUpSound', levelUpSound)
 
     this.load.spritesheet('pieces_spritesheet', pieces, {
       frameWidth: TILE.WIDTH,

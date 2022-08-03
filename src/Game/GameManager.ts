@@ -73,7 +73,7 @@ export default class GameManager {
   }
 
   private levelUp() {
-    gameScene.sound.play('levelUpSound')
+    // gameScene.sound.play('levelUpSound')
     this.level++
     levelText.setText(`Level: ${this.level}`)
     levelBarImg.scaleX = 0
