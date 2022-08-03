@@ -31,6 +31,7 @@ export default class GameManager {
   }
 
   private start() {
+    window.highscores.init('Bejeweled')
     this.resetScoreAndLevel()
     this.map = new Map()
   }
