@@ -18,7 +18,6 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    // this.load.image('background1', 'assets/background1.jpeg')
     this.load.image('backgroundBoard', 'assets/background_board.png')
     this.load.image('Border', 'assets/Border.png')
     this.load.image('selectedTile', 'assets/selectedTile.png')
@@ -45,7 +44,6 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
-    // this.add.image(0, 0, 'background1').setDepth(0).setOrigin(0, 0)
     this.cameras.main.setBackgroundColor('#000')
     this.add.image(INITIAL_BOARD_SCREEN.WIDTH + 120, 1330 + 100, 'LevelBarBackground').setDepth(1).setOrigin(0, 0)
     levelBarImg = this.add.image(INITIAL_BOARD_SCREEN.WIDTH + 125, 1330 + 105, 'LevelBar').setDepth(1).setOrigin(0, 0)
