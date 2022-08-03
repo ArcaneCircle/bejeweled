@@ -18,7 +18,7 @@ export default class MenuScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.setBackgroundColor('#000')
-    this.add.image(HALF_SCREEN.WIDTH - 640, 150, 'logo').setDepth(1).setOrigin(0, 0).setScale(5)
+    this.add.image(this.cameras.main.centerX, 150, 'logo').setDepth(1).setOrigin(0.5, 0).setScale(6)
 
     // this.add.text(HALF_SCREEN.WIDTH, 150, 'BEJEWELED', { font: 'bold 250px monospace' }).setDepth(1).setOrigin(0.5, 0)
 
