@@ -6,7 +6,7 @@ export const config = {
   type: Phaser.AUTO,
   scale: {
     mode: Phaser.Scale.FIT,
-    parent: 'phaser-example',
+    parent: 'bejeweled-game',
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: 1920,
     height: 1720,
