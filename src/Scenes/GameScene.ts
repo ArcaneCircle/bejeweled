@@ -9,8 +9,6 @@ import { INITIAL_BOARD_SCREEN, TILE } from '../Utils/gameValues'
 import backgroundBoard from '/assets/background_board.png'
 import Border from '/assets/Border.png'
 import selectedTile from '/assets/selectedTile.png'
-import ScoreBoard from '/assets/ScoreBoard.png'
-import ScoreBorder from '/assets/ScoreBorder.png'
 import LevelBarBackground from '/assets/levelBarBackground.png'
 import LevelBar from '/assets/levelbar.jpg'
 import ButtonReset from '/assets/buttonReset.png'
@@ -38,8 +36,6 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('backgroundBoard', backgroundBoard)
     this.load.image('Border', Border)
     this.load.image('selectedTile', selectedTile)
-    this.load.image('ScoreBoard', ScoreBoard)
-    this.load.image('ScoreBorder', ScoreBorder)
     this.load.image('LevelBarBackground', LevelBarBackground)
     this.load.image('LevelBar', LevelBar)
     this.load.image('ButtonReset', ButtonReset)
@@ -65,9 +61,6 @@ export default class GameScene extends Phaser.Scene {
     levelBarImg = this.add.image(INITIAL_BOARD_SCREEN.WIDTH + 120, 1260, 'LevelBar').setDepth(1).setOrigin(0, 0)
     this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 70, 'backgroundBoard').setDepth(1).setOrigin(0.5, 0)
     this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 90, 'Border').setDepth(1).setOrigin(0.5, 0)
-
-    this.add.image(this.cameras.main.centerX, 1370, 'ScoreBoard').setDepth(1).setOrigin(0.5, 0)
-    this.add.image(this.cameras.main.centerX, 1370, 'ScoreBorder').setDepth(1).setOrigin(0.5, 0)
 
     const buttonReset = this.add.image(this.cameras.main.centerX, 1370 + 220, 'ButtonReset').setDepth(1).setOrigin(0.5, 0)
     buttonReset.setInteractive({ useHandCursor: true })
