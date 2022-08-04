@@ -9,7 +9,6 @@ import { INITIAL_BOARD_SCREEN, TILE } from '../Utils/gameValues'
 import backgroundBoard from '/assets/background_board.png'
 import Border from '/assets/Border.png'
 import selectedTile from '/assets/selectedTile.png'
-import LevelBarBackground from '/assets/levelBarBackground.png'
 import LevelBar from '/assets/levelbar.jpg'
 import ButtonReset from '/assets/buttonReset.png'
 import ButtonMenu from '/assets/buttonMenu.png'
@@ -36,7 +35,6 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('backgroundBoard', backgroundBoard)
     this.load.image('Border', Border)
     this.load.image('selectedTile', selectedTile)
-    this.load.image('LevelBarBackground', LevelBarBackground)
     this.load.image('LevelBar', LevelBar)
     this.load.image('ButtonReset', ButtonReset)
     this.load.image('ButtonMenu', ButtonMenu)
@@ -57,10 +55,9 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.setBackgroundColor('#000')
-    this.add.image(INITIAL_BOARD_SCREEN.WIDTH + 120, 1260, 'LevelBarBackground').setDepth(1).setOrigin(0, 0)
     levelBarImg = this.add.image(INITIAL_BOARD_SCREEN.WIDTH + 120, 1260, 'LevelBar').setDepth(1).setOrigin(0, 0)
     this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 70, 'backgroundBoard').setDepth(1).setOrigin(0.5, 0)
-    this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 90, 'Border').setDepth(1).setOrigin(0.5, 0)
+    // this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 90, 'Border').setDepth(1).setOrigin(0.5, 0)
 
     const buttonReset = this.add.image(this.cameras.main.centerX, 1370 + 220, 'ButtonReset').setDepth(1).setOrigin(0.5, 0)
     buttonReset.setInteractive({ useHandCursor: true })
