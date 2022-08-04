@@ -1,4 +1,4 @@
-# Bejeweled
+# Dejeweled
 
 Bejeweled board game clon for Delta Chat
 
