@@ -66,19 +66,19 @@ export default class GameScene extends Phaser.Scene {
     this.add.image(INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH / 2, INITIAL_BOARD_SCREEN.HEIGHT - 70, 'backgroundBoard').setDepth(1).setOrigin(0, 0)
     this.add.image(INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH / 2 - 20, INITIAL_BOARD_SCREEN.HEIGHT - 90, 'Border').setDepth(1).setOrigin(0, 0)
 
-    this.add.image(170, 1530, 'ScoreBoard').setDepth(1).setOrigin(0, 0)
-    this.add.image(170 - 20, 1530, 'ScoreBorder').setDepth(1).setOrigin(0, 0)
+    this.add.image(INITIAL_BOARD_SCREEN.WIDTH * 2 - 100, 1370, 'ScoreBoard').setDepth(1).setOrigin(0, 0)
+    this.add.image(INITIAL_BOARD_SCREEN.WIDTH * 2 - 120, 1370, 'ScoreBorder').setDepth(1).setOrigin(0, 0)
 
-    const buttonReset = this.add.image(190, 1530 + 220, 'ButtonReset').setDepth(1).setOrigin(0, 0)
+    const buttonReset = this.add.image(INITIAL_BOARD_SCREEN.WIDTH * 2 - 80, 1370 + 220, 'ButtonReset').setDepth(1).setOrigin(0, 0)
     buttonReset.setInteractive({ useHandCursor: true })
     buttonReset.on('pointerup', () => gameManager.reset())
 
-    const buttonMenu = this.add.image(190, 1530 + 320, 'ButtonMenu').setDepth(1).setOrigin(0, 0)
+    const buttonMenu = this.add.image(INITIAL_BOARD_SCREEN.WIDTH * 2 - 80, 1370 + 320, 'ButtonMenu').setDepth(1).setOrigin(0, 0)
     buttonMenu.setInteractive({ useHandCursor: true })
     buttonMenu.on('pointerup', () => this.scene.start('MenuScene'))
 
-    scoreText = this.add.text(190, 1530 + 120, 'Score: 0', { font: 'bold 53px Geneva' }).setDepth(1)
-    levelText = this.add.text(190, 1530 + 40, 'Level: 1', { font: 'bold 53px Geneva' }).setDepth(1)
+    scoreText = this.add.text(INITIAL_BOARD_SCREEN.WIDTH * 2 - 80, 1370 + 120, 'Score: 0', { font: 'bold 53px Geneva' }).setDepth(1)
+    levelText = this.add.text(INITIAL_BOARD_SCREEN.WIDTH * 2 - 80, 1370 + 40, 'Level: 1', { font: 'bold 53px Geneva' }).setDepth(1)
 
     new GameManager()
   }
