@@ -204,8 +204,7 @@ export default class Map {
     return { matchArrOfPieces, finalMap }
   }
 
-  private checkAdjacentForMatch(map, pieceSelected, piece, arrOfPiecesToMatch, currentValueSide, direction: 'horizontal' | 'vertical'):
-  { matchArrOfPieces: Piece[]; finalMap: Piece[][] } {
+  private checkAdjacentForMatch(map, pieceSelected, piece, arrOfPiecesToMatch, currentValueSide, direction: 'horizontal' | 'vertical'): { matchArrOfPieces: Piece[]; finalMap: Piece[][] } {
     const { pieceTypeByLetter } = piece
     let nextMatch = currentValueSide < 0 ? -1 : 1
     let tileX = direction === 'horizontal' ? piece.currentTile.tileX + (currentValueSide + nextMatch) : piece.currentTile.tileX

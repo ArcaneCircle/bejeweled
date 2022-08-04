@@ -16,7 +16,7 @@ export const MAP = {
 }
 
 export const BACKGROUND = {
-  WIDTH: 1720,
+  WIDTH: 1440,
   HEIGHT: 1920,
 }
 
@@ -26,6 +26,6 @@ export const HALF_SCREEN = {
 }
 
 export const INITIAL_BOARD_SCREEN = {
-  WIDTH: (HALF_SCREEN.WIDTH / 2),
+  WIDTH: 200,
   HEIGHT: 120,
 }

@@ -8,7 +8,7 @@ export const config = {
     mode: Phaser.Scale.FIT,
     parent: 'bejeweled-game',
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    width: 1720,
+    width: 1440,
     height: 1920,
     backgroundColor: '#df8e73',
   },

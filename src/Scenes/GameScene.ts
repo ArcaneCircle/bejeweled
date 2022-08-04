@@ -62,23 +62,23 @@ export default class GameScene extends Phaser.Scene {
   create() {
     this.cameras.main.setBackgroundColor('#000')
     this.add.image(INITIAL_BOARD_SCREEN.WIDTH + 120, 1260, 'LevelBarBackground').setDepth(1).setOrigin(0, 0)
-    levelBarImg = this.add.image(INITIAL_BOARD_SCREEN.WIDTH + 125, 1260, 'LevelBar').setDepth(1).setOrigin(0, 0)
-    this.add.image(INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH / 2, INITIAL_BOARD_SCREEN.HEIGHT - 70, 'backgroundBoard').setDepth(1).setOrigin(0, 0)
-    this.add.image(INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH / 2 - 20, INITIAL_BOARD_SCREEN.HEIGHT - 90, 'Border').setDepth(1).setOrigin(0, 0)
+    levelBarImg = this.add.image(INITIAL_BOARD_SCREEN.WIDTH + 120, 1260, 'LevelBar').setDepth(1).setOrigin(0, 0)
+    this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 70, 'backgroundBoard').setDepth(1).setOrigin(0.5, 0)
+    this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 90, 'Border').setDepth(1).setOrigin(0.5, 0)
 
-    this.add.image(INITIAL_BOARD_SCREEN.WIDTH * 2 - 100, 1370, 'ScoreBoard').setDepth(1).setOrigin(0, 0)
-    this.add.image(INITIAL_BOARD_SCREEN.WIDTH * 2 - 120, 1370, 'ScoreBorder').setDepth(1).setOrigin(0, 0)
+    this.add.image(this.cameras.main.centerX, 1370, 'ScoreBoard').setDepth(1).setOrigin(0.5, 0)
+    this.add.image(this.cameras.main.centerX, 1370, 'ScoreBorder').setDepth(1).setOrigin(0.5, 0)
 
-    const buttonReset = this.add.image(INITIAL_BOARD_SCREEN.WIDTH * 2 - 80, 1370 + 220, 'ButtonReset').setDepth(1).setOrigin(0, 0)
+    const buttonReset = this.add.image(this.cameras.main.centerX, 1370 + 220, 'ButtonReset').setDepth(1).setOrigin(0.5, 0)
     buttonReset.setInteractive({ useHandCursor: true })
     buttonReset.on('pointerup', () => gameManager.reset())
 
-    const buttonMenu = this.add.image(INITIAL_BOARD_SCREEN.WIDTH * 2 - 80, 1370 + 320, 'ButtonMenu').setDepth(1).setOrigin(0, 0)
+    const buttonMenu = this.add.image(this.cameras.main.centerX, 1370 + 320, 'ButtonMenu').setDepth(1).setOrigin(0.5, 0)
     buttonMenu.setInteractive({ useHandCursor: true })
     buttonMenu.on('pointerup', () => this.scene.start('MenuScene'))
 
-    scoreText = this.add.text(INITIAL_BOARD_SCREEN.WIDTH * 2 - 80, 1370 + 120, 'Score: 0', { font: 'bold 53px Geneva' }).setDepth(1)
-    levelText = this.add.text(INITIAL_BOARD_SCREEN.WIDTH * 2 - 80, 1370 + 40, 'Level: 1', { font: 'bold 53px Geneva' }).setDepth(1)
+    scoreText = this.add.text(this.cameras.main.centerX, 1370 + 120, 'Score: 0', { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0.5, 0)
+    levelText = this.add.text(this.cameras.main.centerX, 1370 + 40, 'Level: 1', { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0.5, 0)
 
     new GameManager()
   }
