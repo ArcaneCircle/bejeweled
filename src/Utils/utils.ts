@@ -158,6 +158,6 @@ export const recognizeScoreType = (pieces: Piece[]): ScoreTypes => {
   else {
     scoreType = `${xCounter === 1 ? yCounter : xCounter}line` as ScoreTypes
   }
-
+  console.log('Scoretype: ', scoreType)
   return scoreType
 }

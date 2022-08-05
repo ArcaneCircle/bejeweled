@@ -103,7 +103,7 @@ export default class GameManager {
   }
 
   private async scoreIt(scoreToType: ScoreTypes, pieces: Piece[]) {
-    let toScore = 100
+    let toScore = 2000
     switch (scoreToType) {
       case '3line':
         toScore = 50
