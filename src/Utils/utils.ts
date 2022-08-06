@@ -161,3 +161,16 @@ export const recognizeScoreType = (pieces: Piece[]): ScoreTypes => {
   console.log('Scoretype: ', scoreType)
   return scoreType
 }
+
+export const getPieceTypeList = (map: Piece[][]) => {
+  const arr = [[]] as unknown as PIECE_TYPES
+  // map.map(row => row.map(piece => piece.pieceType))
+  for (let i = 0; i < MAP.TOTAL_TILES_WIDTH; i++) {
+    arr[i] = []
+    for (let j = 0; j < MAP.TOTAL_TILES_HEIGHT; j++) {
+      // console.log(this.savedMap[i][0].frameKey, pieceTypeLetter)
+      arr[i][j] = map[i][j].pieceTypeByLetter
+    }
+  }
+  return arr
+}

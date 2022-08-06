@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-this-alias */
 /* eslint-disable import/no-mutable-exports */
 import type { PositionInTile, TileNumbers } from '../game.interfaces'
@@ -32,11 +33,13 @@ export default class Map {
 
   createRealMap() {
     let tempMap: Piece[][] = []
+    let mapExist = window.localStorage.getItem('dejeweled-map') !== null
     do {
       if (tempMap)
         this.clearMap(tempMap)
       tempMap = this.generateMap()
-    } while (this.isBoardMatch(tempMap).isMatch === true)
+      mapExist = window.localStorage.getItem('dejeweled-map') !== null
+    } while (this.isBoardMatch(tempMap).isMatch === true && !mapExist)
     this.currentMap = tempMap
   }
 
@@ -67,12 +70,14 @@ export default class Map {
 
   generateMap(): Piece[][] {
     const tempMap: Piece[][] = [[]]
+    const mapExist = window.localStorage.getItem('dejeweled-map') !== null
+    const savedTypes = JSON.parse(window.localStorage.getItem('dejeweled-map') as string)
     for (let i = 0; i < MAP.TOTAL_TILES_WIDTH; i++) {
       tempMap[i] = []
       for (let j = 0; j < MAP.TOTAL_TILES_HEIGHT; j++) {
         const x = (INITIAL_BOARD_SCREEN.WIDTH) + (i * (TILE.WIDTH))
         const y = INITIAL_BOARD_SCREEN.HEIGHT + (j * (TILE.HEIGHT))
-        const pieceTypeLetter = getRandomValueFromArray(PIECE_TYPES)
+        const pieceTypeLetter = mapExist ? savedTypes[i][j] : getRandomValueFromArray(PIECE_TYPES)
         const piece = new Piece(pieceTypeLetter, { x, y })
         tempMap[i][j] = piece
       }

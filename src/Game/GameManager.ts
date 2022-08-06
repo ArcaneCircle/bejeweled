@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 /* eslint-disable import/no-mutable-exports */
 /* eslint-disable linebreak-style */
-import { average, convertTileToPosition, getPieceHashColor, getRandomValueFromArray, isNumberInsideBoard, makeMovementAnimation, makeScaleAnimation, recognizeScoreType, rndNumber, timeout } from '../Utils/utils'
+import { average, convertTileToPosition, getPieceHashColor, getPieceTypeList, getRandomValueFromArray, isNumberInsideBoard, makeMovementAnimation, makeScaleAnimation, recognizeScoreType, rndNumber, timeout } from '../Utils/utils'
 import { gameScene, levelBarImg, levelText, scoreText } from '../Scenes/GameScene'
 import type { PositionInPixel, PositionInTile, ScoreTypes, TileNumbers } from '../game.interfaces'
 import { INITIAL_BOARD_SCREEN, LEVEL_SCORE_TO_ADD, PIECE_TYPES, TILE } from '../Utils/gameValues'
@@ -31,9 +31,10 @@ export default class GameManager {
   }
 
   private start() {
-    window.highscores.init('Bejeweled')
+    window.highscores.init('Dejeweled')
     this.resetScoreAndLevel()
     this.map = new Map()
+    this.checkMatches()
   }
 
   public resetScoreAndLevel() {
@@ -46,9 +47,11 @@ export default class GameManager {
   }
 
   public reset() {
-    map.resetMap()
+    // remove map from localStorage
+    window.localStorage.removeItem('dejeweled-map')
     // send score before reset
     window.highscores.setScore(this.score)
+    map.resetMap()
     this.resetScoreAndLevel()
     // this.gameOver()
   }
@@ -73,6 +76,8 @@ export default class GameManager {
   private async scoreAndLevelUp(pieces: Piece[]) {
     const scoreType = recognizeScoreType(pieces)
     await this.scoreIt(scoreType, pieces)
+    // save map with every point
+    window.localStorage.setItem('dejeweled-map', JSON.stringify(getPieceTypeList(map.getCurrentMap())))
     if (this.score >= this.scoreObjective)
       this.levelUp()
   }
@@ -188,13 +193,16 @@ export default class GameManager {
       this.resetPiecesForAction()
       await pieceToSwitch.switch(this.lastPiece)
       const { matchArrOfPieces, finalMap } = map.checkMatch(map.getCurrentMap(), this.lastPiece)
-      if (finalMap && finalMap.length > 0)
+      if (finalMap && finalMap.length > 0) {
+        window.localStorage.setItem('dejeweled-map', JSON.stringify(getPieceTypeList(finalMap)))
         map.setCurrentMap(finalMap)
+      }
 
       let opositePieceMatchArr: Piece[] = []
       const opositePieceResponse = map.checkMatch(map.getCurrentMap(), pieceToSwitch)
       if (opositePieceResponse.finalMap && opositePieceResponse.finalMap.length > 0) {
         map.setCurrentMap(opositePieceResponse.finalMap)
+        window.localStorage.setItem('dejeweled-map', JSON.stringify(getPieceTypeList(opositePieceResponse.finalMap)))
         opositePieceMatchArr = opositePieceResponse.matchArrOfPieces
       }
 
@@ -324,5 +332,26 @@ export default class GameManager {
       piece.updatePiecePositionAndTile(tilePosition)
       makeMovementAnimation(piece, convertTileToPosition(tilePosition), 200)
     })
+  }
+
+  private async checkMatches() {
+    const mapExist = window.localStorage.getItem('dejeweled-map') !== null
+    if (mapExist) {
+      let resultForGameOver = map.isBoardMatch(map.getCurrentMap())
+
+      const resultForFutureMoves = map.isExistantFutureMoves(map.getCurrentMap())
+      if (!resultForGameOver.isMatch && !resultForFutureMoves)
+        this.gameOver()
+
+      if (resultForGameOver.isMatch) {
+        do {
+          await this.matchAgain(resultForGameOver.piece)
+          resultForGameOver = map.isBoardMatch(map.getCurrentMap())
+        } while (resultForGameOver.isMatch)
+
+        if (!map.isExistantFutureMoves(map.getCurrentMap()))
+          this.gameOver()
+      }
+    }
   }
 }
