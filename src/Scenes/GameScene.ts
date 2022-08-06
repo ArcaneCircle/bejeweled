@@ -20,7 +20,7 @@ import bubble3 from '/assets/bubble_single_3.mp3'
 import pieces from '/assets/pieces.png'
 
 export let gameScene: Phaser.Scene
-export let scoreText, levelText
+export let scoreText, levelText, buttonMenu, buttonReset
 export let levelBarImg: Phaser.GameObjects.Image
 
 export default class GameScene extends Phaser.Scene {
@@ -59,13 +59,14 @@ export default class GameScene extends Phaser.Scene {
     this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 70, 'backgroundBoard').setDepth(1).setOrigin(0.5, 0)
     this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 90, 'Border').setDepth(1).setOrigin(0.5, 0)
 
-    const buttonReset = this.add.image(this.cameras.main.centerX, 1370 + 220, 'ButtonReset').setDepth(1).setOrigin(0.5, 0)
+    buttonReset = this.add.image(this.cameras.main.centerX, 1370 + 220, 'ButtonReset').setDepth(1).setOrigin(0.5, 0)
     buttonReset.setInteractive({ useHandCursor: true })
     buttonReset.on('pointerup', () => gameManager.reset())
 
-    const buttonMenu = this.add.image(this.cameras.main.centerX, 1370 + 320, 'ButtonMenu').setDepth(1).setOrigin(0.5, 0)
+    buttonMenu = this.add.image(this.cameras.main.centerX, 1370 + 320, 'ButtonMenu').setDepth(1).setOrigin(0.5, 0)
     buttonMenu.setInteractive({ useHandCursor: true })
-    buttonMenu.on('pointerup', () => this.scene.start('MenuScene'))
+    // buttonMenu.on('pointerup', () => this.scene.start('MenuScene'))
+    buttonMenu.on('pointerup', () => gameManager.gameOver())
 
     scoreText = this.add.text(this.cameras.main.centerX, 1370 + 120, 'Score: 0', { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0.5, 0)
     levelText = this.add.text(this.cameras.main.centerX, 1370 + 40, 'Level: 1', { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0.5, 0)

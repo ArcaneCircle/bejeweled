@@ -24,6 +24,9 @@ export default class GameManager {
   previousScoreObjective!: number
   isPieceSelectedInFrame = false
   isMoving = false
+  GOMenu: null | Phaser.GameObjects.Image = null
+  GOBtn: null | Phaser.GameObjects.Image = null
+  GOText: null | Phaser.GameObjects.Text = null
 
   constructor() {
     gameManager = this
@@ -57,6 +60,12 @@ export default class GameManager {
     map.resetMap()
     this.resetScoreAndLevel()
     // this.gameOver()
+    if (this.GOMenu)
+      this.GOMenu.destroy()
+    if (this.GOBtn)
+      this.GOBtn.destroy()
+    if (this.GOText)
+      this.GOText.destroy()
   }
 
   public changeCurrentSelectedPiece(newPiece: Piece): Piece {
@@ -248,18 +257,19 @@ export default class GameManager {
   }
 
   public gameOver() {
-    const scoreMenu = gameScene.add.image(INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH / 2 - 20, 500, 'ScoreMenu').setDepth(1).setOrigin(0, 0).setScale(2)
-    const buttonMenu = gameScene.add.image(scoreMenu.x + scoreMenu.width - 188, scoreMenu.y + 250, 'RestartButton').setDepth(1).setOrigin(0, 0)
-    buttonMenu.setInteractive({ useHandCursor: true })
+    this.GOMenu = gameScene.add.image(INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH / 2 - 20, 500, 'ScoreMenu').setDepth(1).setOrigin(0, 0).setScale(2)
+    console.log(this.GOMenu)
+    this.GOBtn = gameScene.add.image(this.GOMenu.x + this.GOMenu.width - 188, this.GOMenu.y + 250, 'RestartButton').setDepth(1).setOrigin(0, 0)
+    this.GOBtn.setInteractive({ useHandCursor: true })
 
-    const scoreText = gameScene.add.text(scoreMenu.x + (scoreMenu.width / 2) * 2, scoreMenu.y + 200, this.score.toString(), { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0, 0)
+    this.GOText = gameScene.add.text(this.GOMenu.x + this.GOMenu.width, this.GOMenu.y + 200, this.score.toString(), { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0, 0)
 
     window.highscores.setScore(this.score)
 
-    buttonMenu.on('pointerup', () => {
-      buttonMenu.destroy()
-      scoreMenu.destroy()
-      scoreText.destroy()
+    this.GOBtn.on('pointerup', () => {
+      this.GOBtn && this.GOBtn.destroy()
+      this.GOMenu && this.GOMenu.destroy()
+      this.GOText && this.GOText.destroy()
       this.reset()
     })
   }
