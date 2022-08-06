@@ -65,8 +65,8 @@ export default class GameScene extends Phaser.Scene {
 
     buttonMenu = this.add.image(this.cameras.main.centerX, 1370 + 320, 'ButtonMenu').setDepth(1).setOrigin(0.5, 0)
     buttonMenu.setInteractive({ useHandCursor: true })
-    // buttonMenu.on('pointerup', () => this.scene.start('MenuScene'))
-    buttonMenu.on('pointerup', () => gameManager.gameOver())
+    buttonMenu.on('pointerup', () => this.scene.start('MenuScene'))
+    // buttonMenu.on('pointerup', () => gameManager.gameOver())
 
     scoreText = this.add.text(this.cameras.main.centerX, 1370 + 120, 'Score: 0', { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0.5, 0)
     levelText = this.add.text(this.cameras.main.centerX, 1370 + 40, 'Level: 1', { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0.5, 0)
