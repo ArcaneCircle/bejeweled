@@ -38,12 +38,14 @@ export default class GameManager {
   }
 
   public resetScoreAndLevel() {
-    this.level = 1
-    this.scoreObjective = this.level * LEVEL_SCORE_TO_ADD
-    this.previousScoreObjective = 0
     this.score = parseInt(window.localStorage.getItem('dejeweled-score') ?? '0')
+    // console.log('level: ', Math.floor(this.score / LEVEL_SCORE_TO_ADD) + 1)
+    this.level = Math.floor(this.score / LEVEL_SCORE_TO_ADD) + 1
+    this.scoreObjective = this.level * LEVEL_SCORE_TO_ADD
+    this.previousScoreObjective = (this.level - 1) * LEVEL_SCORE_TO_ADD
     levelBarImg.scaleX = 0
     scoreText.setText(`Score: ${this.score}`)
+    levelText.setText(`Level: ${this.level}`)
   }
 
   public reset() {
