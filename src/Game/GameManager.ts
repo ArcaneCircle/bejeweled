@@ -41,16 +41,17 @@ export default class GameManager {
     this.level = 1
     this.scoreObjective = this.level * LEVEL_SCORE_TO_ADD
     this.previousScoreObjective = 0
-    this.score = 0
+    this.score = parseInt(window.localStorage.getItem('dejeweled-score') ?? '0')
     levelBarImg.scaleX = 0
     scoreText.setText(`Score: ${this.score}`)
   }
 
   public reset() {
-    // remove map from localStorage
-    window.localStorage.removeItem('dejeweled-map')
     // send score before reset
     window.highscores.setScore(this.score)
+    // remove map and score from localStorage
+    window.localStorage.removeItem('dejeweled-map')
+    window.localStorage.removeItem('dejeweled-score')
     map.resetMap()
     this.resetScoreAndLevel()
     // this.gameOver()
@@ -78,6 +79,8 @@ export default class GameManager {
     await this.scoreIt(scoreType, pieces)
     // save map with every point
     window.localStorage.setItem('dejeweled-map', JSON.stringify(getPieceTypeList(map.getCurrentMap())))
+    window.localStorage.setItem('dejeweled-score', this.score.toString())
+
     if (this.score >= this.scoreObjective)
       this.levelUp()
   }
