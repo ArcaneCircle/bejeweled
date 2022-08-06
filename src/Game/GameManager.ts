@@ -262,7 +262,7 @@ export default class GameManager {
     this.GOBtn = gameScene.add.image(this.GOMenu.x + this.GOMenu.width - 188, this.GOMenu.y + 250, 'RestartButton').setDepth(1).setOrigin(0, 0)
     this.GOBtn.setInteractive({ useHandCursor: true })
 
-    this.GOText = gameScene.add.text(this.GOMenu.x + this.GOMenu.width, this.GOMenu.y + 200, this.score.toString(), { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0, 0)
+    this.GOText = gameScene.add.text(this.GOMenu.x + this.GOMenu.width, this.GOMenu.y + 200, this.score.toString(), { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0.5, 0)
 
     window.highscores.setScore(this.score)
 
