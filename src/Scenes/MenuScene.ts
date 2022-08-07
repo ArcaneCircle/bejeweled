@@ -26,7 +26,7 @@ export default class MenuScene extends Phaser.Scene {
 
     // Add scoreboard
     const scores = getScoreboardArray()
-    const scoreboard = this.add.text(this.cameras.main.centerX, 700, scores, { font: 'bold 70px monospace' }).setDepth(1).setOrigin(0.5, 0)
+    const scoreboard = this.add.text(this.cameras.main.centerX, 700, scores, { font: 'bold 70px monospace', align: 'center' }).setDepth(1).setOrigin(0.5, 0)
 
     const start = this.add.text(this.cameras.main.centerX, HALF_SCREEN.HEIGHT + 200, 'Press any key to start', { font: 'bold 53px monospace', color: 'white' }).setDepth(1).setOrigin(0.5)
 
