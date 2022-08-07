@@ -46,7 +46,8 @@ export default class GameManager {
     this.level = Math.floor(this.score / LEVEL_SCORE_TO_ADD) + 1
     this.scoreObjective = this.level * LEVEL_SCORE_TO_ADD
     this.previousScoreObjective = (this.level - 1) * LEVEL_SCORE_TO_ADD
-    levelBarImg.scaleX = 0
+    // levelBarImg.scaleX = 0
+    levelBarImg.scaleX = (this.score - this.previousScoreObjective) / (LEVEL_SCORE_TO_ADD + (this.level > 1 ? this.level * 100 : 0))
     scoreText.setText(`Score: ${this.score}`)
     levelText.setText(`Level: ${this.level}`)
   }
