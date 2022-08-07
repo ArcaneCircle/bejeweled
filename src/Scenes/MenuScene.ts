@@ -34,6 +34,10 @@ export default class MenuScene extends Phaser.Scene {
       this.scene.start('GameScene')
     }, this)
 
+    this.input.keyboard.on('keydown', () => {
+      this.scene.start('GameScene')
+    }, this)
+
     return 3
   }
 }
