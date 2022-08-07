@@ -1,5 +1,5 @@
 import 'phaser'
-import { BACKGROUND } from '../Utils/gameValues'
+import { BACKGROUND } from '~/Utils/gameValues'
 import { getScoreboardArray } from '~/Utils/utils'
 
 import title from '/assets/Bejeweled_title.png'
@@ -29,8 +29,6 @@ export default class MenuScene extends Phaser.Scene {
     this.add.text(this.cameras.main.centerX, 700, scores, { font: 'bold 70px monospace', align: 'center' }).setDepth(1).setOrigin(0.5, 0)
 
     this.add.text(this.cameras.main.centerX, BACKGROUND.HEIGHT - 200, 'Press any key to start', { font: 'bold 53px monospace', color: '#c94cb1' }).setDepth(1).setOrigin(0.5)
-
-    // Phaser.Display.Align.In.BottomCenter(start, scoreboard, 0, 100)
 
     this.input.on('pointerup', () => {
       this.scene.start('GameScene')
