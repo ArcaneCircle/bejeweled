@@ -179,7 +179,7 @@ export const getScoreboardArray = () => {
   const scores = window.highscores.getHighScores()
   // const arr = scores.slice(0, 10).map(p => `${p.pos}. ${p.name} ${p.score}`)
   const posArr = scores.slice(0, 10).map(p => p.pos)
-  const nameArr = scores.slice(0, 10).map(p => p.name)
+  const nameArr = scores.slice(0, 10).map(p => p.name.slice(0, 25))
   const scoreArr = scores.slice(0, 10).map(p => p.score.toString())
   return { posArr, nameArr, scoreArr }
 }
