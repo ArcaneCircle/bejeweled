@@ -164,20 +164,16 @@ export const recognizeScoreType = (pieces: Piece[]): ScoreTypes => {
 
 export const getPieceTypeList = (map: Piece[][]) => {
   const arr = [[]] as unknown as PIECE_TYPES
-  // map.map(row => row.map(piece => piece.pieceType))
   for (let i = 0; i < MAP.TOTAL_TILES_WIDTH; i++) {
     arr[i] = []
-    for (let j = 0; j < MAP.TOTAL_TILES_HEIGHT; j++) {
-      // console.log(this.savedMap[i][0].frameKey, pieceTypeLetter)
+    for (let j = 0; j < MAP.TOTAL_TILES_HEIGHT; j++)
       arr[i][j] = map[i][j].pieceTypeByLetter
-    }
   }
   return arr
 }
 
 export const getScoreboardArray = () => {
   const scores = window.highscores.getHighScores()
-  // const arr = scores.slice(0, 10).map(p => `${p.pos}. ${p.name} ${p.score}`)
   const posArr = scores.slice(0, 10).map(p => p.pos)
   const nameArr = scores.slice(0, 10).map(p => p.name.slice(0, 25))
   const scoreArr = scores.slice(0, 10).map(p => p.score.toString())
