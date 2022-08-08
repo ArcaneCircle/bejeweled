@@ -25,8 +25,10 @@ export default class MenuScene extends Phaser.Scene {
     // this.add.text(HALF_SCREEN.WIDTH, 150, 'BEJEWELED', { font: 'bold 250px monospace' }).setDepth(1).setOrigin(0.5, 0)
 
     // Add scoreboard
-    const scores = getScoreboardArray()
-    this.add.text(this.cameras.main.centerX, 700, scores, { font: 'bold 70px monospace', align: 'center' }).setDepth(1).setOrigin(0.5, 0)
+    const { posArr, nameArr, scoreArr } = getScoreboardArray()
+    this.add.text(100, 700, posArr, { font: 'bold 70px monospace', align: 'left' }).setDepth(1).setOrigin(0, 0)
+    this.add.text(this.cameras.main.centerX, 700, nameArr, { font: 'bold 70px monospace', align: 'center' }).setDepth(1).setOrigin(0.5, 0)
+    this.add.text(1350, 700, scoreArr, { font: 'bold 70px monospace', align: 'right' }).setDepth(1).setOrigin(1, 0)
 
     this.add.text(this.cameras.main.centerX, BACKGROUND.HEIGHT - 200, 'Press any key to start', { font: 'bold 53px monospace', color: '#c94cb1' }).setDepth(1).setOrigin(0.5)
 

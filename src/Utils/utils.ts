@@ -177,7 +177,9 @@ export const getPieceTypeList = (map: Piece[][]) => {
 
 export const getScoreboardArray = () => {
   const scores = window.highscores.getHighScores()
-  const arr = scores.slice(0, 10).map(p => `${p.pos}. ${p.name} ${p.score}`)
-  // console.log('🚀 ~ file: utils.ts ~ line 180 ~ arr', arr)
-  return arr
+  // const arr = scores.slice(0, 10).map(p => `${p.pos}. ${p.name} ${p.score}`)
+  const posArr = scores.slice(0, 10).map(p => p.pos)
+  const nameArr = scores.slice(0, 10).map(p => p.name)
+  const scoreArr = scores.slice(0, 10).map(p => p.score.toString())
+  return { posArr, nameArr, scoreArr }
 }
