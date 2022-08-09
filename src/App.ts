@@ -1,6 +1,6 @@
 import GameScene from './Scenes/GameScene'
 import MenuScene from './Scenes/MenuScene'
-import 'phaser'
+import './phaser-core.min.js'
 
 export const config = {
   type: Phaser.AUTO,

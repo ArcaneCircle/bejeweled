@@ -1,4 +1,4 @@
-import 'phaser'
+import '../phaser-core.min.js'
 import { BACKGROUND } from '~/Utils/gameValues'
 import { getScoreboardArray } from '~/Utils/utils'
 

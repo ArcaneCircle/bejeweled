@@ -1,7 +1,7 @@
 /* eslint-disable no-new */
 /* eslint-disable @typescript-eslint/no-this-alias */
 /* eslint-disable import/no-mutable-exports */
-import 'phaser'
+import '../phaser-core.min.js'
 
 import GameManager, { gameManager } from '../Game/GameManager'
 import { INITIAL_BOARD_SCREEN, TILE } from '../Utils/gameValues'
