@@ -2,7 +2,7 @@ import '../phaser-core.min.js'
 import { BACKGROUND } from '~/Utils/gameValues'
 import { getScoreboardArray } from '~/Utils/utils'
 
-import title from '/assets/Bejeweled_title.png'
+import title from '~/assets/Bejeweled_title.png'
 
 export default class MenuScene extends Phaser.Scene {
   // private playerCarsGroup: Phaser.GameObjects.Group;
