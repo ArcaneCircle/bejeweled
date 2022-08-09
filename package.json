@@ -11,7 +11,7 @@
     "dev": "vite --port 3333",
     "webxdc-dev": "webxdc-dev run http://localhost:3333/",
     "webxdc-xdc": "webxdc-dev run dist/package.xdc",
-    "old-dev": "concurrently \"pnpm webxdc-dev\" \"pnpm vite-dev\""
+    "old-dev": "concurrently \"pnpm webxdc-dev\" \"pnpm dev\""
   },
   "dependencies": {
     "lodash": "^4.17.21",
