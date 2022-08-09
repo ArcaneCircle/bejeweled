@@ -42,10 +42,9 @@ export default class GameManager {
 
   public resetScoreAndLevel() {
     this.score = parseInt(window.localStorage.getItem('dejeweled-score') ?? '0')
-    // console.log('level: ', Math.floor(this.score / LEVEL_SCORE_TO_ADD) + 1)
     this.level = Math.floor(this.score / LEVEL_SCORE_TO_ADD) + 1
-    this.scoreObjective = this.level * LEVEL_SCORE_TO_ADD
-    this.previousScoreObjective = (this.level - 1) * LEVEL_SCORE_TO_ADD
+    this.scoreObjective = this.level * LEVEL_SCORE_TO_ADD + (this.level > 1 ? this.level * 100 : 0)
+    this.previousScoreObjective = this.scoreObjective - (LEVEL_SCORE_TO_ADD) - (this.level > 1 ? this.level * 100 : 0)
     // levelBarImg.scaleX = 0
     levelBarImg.scaleX = (this.score - this.previousScoreObjective) / (LEVEL_SCORE_TO_ADD + (this.level > 1 ? this.level * 100 : 0))
     scoreText.setText(`Score: ${this.score}`)
@@ -172,7 +171,7 @@ export default class GameManager {
       const newScaleXVal = (this.score - this.previousScoreObjective) / (LEVEL_SCORE_TO_ADD + (this.level > 1 ? this.level * 100 : 0))
       gameScene.tweens.add({
         targets: levelBarImg,
-        scaleX: newScaleXVal,
+        scaleX: newScaleXVal > 1 ? 1 : newScaleXVal,
         ease: 'Linear',
         duration: 500,
         onComplete() {
