@@ -20,7 +20,7 @@ export default class Map {
 
   start() {
     this.createRealMap()
-    // this.createFakeMap();
+    // this.createFakeMap()
   }
 
   public resetMap() {
@@ -46,9 +46,9 @@ export default class Map {
   createFakeMap() {
     const newFakeMap: Piece[][] = []
     const fakeMap = [ // No match
-      ['g', 'y', 'b', 'b', 'r', 'g', 'p', 'p'],
-      ['w', 'w', 'g', 'g', 'g', 'w', 'g', 'g'],
-      ['w', 'g', 'r', 'r', 'g', 'p', 'r', 'p'],
+      ['g', 'y', 'b', 'g', 'y', 'g', 'p', 'p'],
+      ['w', 'w', 'y', 'y', 'g', 'y', 'y', 'g'],
+      ['w', 'g', 'r', 'y', 'g', 'p', 'r', 'p'],
       ['r', 'w', 'b', 'w', 'r', 'w', 'r', 'b'],
       ['w', 'y', 'g', 'r', 'w', 'b', 'w', 'b'],
       ['w', 'y', 'y', 'w', 'w', 'p', 'g', 'r'],
