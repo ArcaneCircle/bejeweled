@@ -104,14 +104,14 @@ export default class GameManager {
     this.scoreObjective = this.level * LEVEL_SCORE_TO_ADD + (this.level * 100)
   }
 
-  private insertModalText(text: string | number, { x, y }: PositionInPixel, _type = 'normal', color = '#ffffff') {
+  private insertModalText(text: string | number, { x, y }: PositionInPixel, _type = 'normal', color = '#ffffff', duration = 600) {
     const levelText = gameScene.add.text(x, y, text.toString(), {
       font: 'bold 63px Geneva',
       stroke: '#000000',
       strokeThickness: 10,
       color,
     }).setDepth(1.1).setOrigin(0.5, 0.5)
-    makeMovementAnimation(levelText, { x: levelText.x, y: levelText.y - 250 }, 600)
+    makeMovementAnimation(levelText, { x: levelText.x, y: levelText.y - 250 }, duration)
 
     gameScene.tweens.add({
       targets: levelText,
@@ -167,7 +167,7 @@ export default class GameManager {
   }
 
   comboUI(combo: number, x = 100, y = 100) {
-    this.insertModalText(`${combo}x combo`, { x, y }, 'combo', '#df8e73')
+    this.insertModalText(`${combo}x combo`, { x, y }, 'combo', '#df8e73', 1500)
   }
 
   private async updateLevelBar() {
@@ -247,7 +247,7 @@ export default class GameManager {
           console.log(`${combo}x combo`)
           this.comboUI(combo, 720, 1490)
           this.score += combo * 100
-          await timeout(500)
+          // await timeout(1000)
           resultForGameOver = map.isBoardMatch(map.getCurrentMap())
         } while (resultForGameOver.isMatch)
 
