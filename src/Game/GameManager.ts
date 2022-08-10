@@ -210,14 +210,21 @@ export default class GameManager {
       this.isMoving = true
       this.resetPiecesForAction()
       await pieceToSwitch.switch(this.lastPiece)
+      // initialize combo counter
+      let combo = 0
       const { matchArrOfPieces, finalMap } = map.checkMatch(map.getCurrentMap(), this.lastPiece)
       if (finalMap && finalMap.length > 0) {
         map.setCurrentMap(finalMap)
         window.localStorage.setItem('dejeweled-map', JSON.stringify(getPieceTypeList(finalMap)))
       }
 
-      if (matchArrOfPieces.length >= 3)
+      if (matchArrOfPieces.length >= 3) {
         await this.matchIt(matchArrOfPieces)
+        combo++
+        console.log(`${combo}x combo`)
+        if (combo > 1)
+          this.comboUI(combo, 720, 1490)
+      }
 
       let opositePieceMatchArr: Piece[] = []
       const opositePieceResponse = map.checkMatch(map.getCurrentMap(), pieceToSwitch)
@@ -227,8 +234,13 @@ export default class GameManager {
         opositePieceMatchArr = opositePieceResponse.matchArrOfPieces
       }
 
-      if (opositePieceMatchArr.length >= 3)
+      if (opositePieceMatchArr.length >= 3) {
         await this.matchIt(opositePieceMatchArr)
+        combo++
+        console.log(`${combo}x combo`)
+        if (combo > 1)
+          this.comboUI(combo, 720, 1490)
+      }
 
       if (opositePieceMatchArr.length <= 0 && matchArrOfPieces.length <= 0)
         await pieceToSwitch.switch(this.lastPiece)
@@ -239,7 +251,6 @@ export default class GameManager {
       if (!resultForGameOver.isMatch && !resultForFutureMoves)
         this.gameOver()
 
-      let combo = 1
       if (resultForGameOver.isMatch) {
         do {
           await this.matchAgain(resultForGameOver.piece)
