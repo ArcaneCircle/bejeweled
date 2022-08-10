@@ -116,7 +116,7 @@ export default class GameManager {
     gameScene.tweens.add({
       targets: levelText,
       alpha: 0,
-      duration: 1000,
+      duration: 1500,
       ease: 'Power2',
     })
   }
