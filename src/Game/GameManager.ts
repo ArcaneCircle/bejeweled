@@ -208,20 +208,20 @@ export default class GameManager {
       await pieceToSwitch.switch(this.lastPiece)
       const { matchArrOfPieces, finalMap } = map.checkMatch(map.getCurrentMap(), this.lastPiece)
       if (finalMap && finalMap.length > 0) {
-        window.localStorage.setItem('dejeweled-map', JSON.stringify(getPieceTypeList(finalMap)))
         map.setCurrentMap(finalMap)
-      }
-
-      let opositePieceMatchArr: Piece[] = []
-      const opositePieceResponse = map.checkMatch(map.getCurrentMap(), pieceToSwitch)
-      if (opositePieceResponse.finalMap && opositePieceResponse.finalMap.length > 0) {
-        map.setCurrentMap(opositePieceResponse.finalMap)
-        window.localStorage.setItem('dejeweled-map', JSON.stringify(getPieceTypeList(opositePieceResponse.finalMap)))
-        opositePieceMatchArr = opositePieceResponse.matchArrOfPieces
+        window.localStorage.setItem('dejeweled-map', JSON.stringify(getPieceTypeList(finalMap)))
       }
 
       if (matchArrOfPieces.length >= 3)
         await this.matchIt(matchArrOfPieces)
+
+      let opositePieceMatchArr: Piece[] = []
+      const opositePieceResponse = map.checkMatch(map.getCurrentMap(), pieceToSwitch)
+      if (opositePieceResponse.finalMap && opositePieceResponse.matchArrOfPieces.length > 0) {
+        map.setCurrentMap(opositePieceResponse.finalMap)
+        window.localStorage.setItem('dejeweled-map', JSON.stringify(getPieceTypeList(opositePieceResponse.finalMap)))
+        opositePieceMatchArr = opositePieceResponse.matchArrOfPieces
+      }
 
       if (opositePieceMatchArr.length >= 3)
         await this.matchIt(opositePieceMatchArr)
@@ -235,10 +235,13 @@ export default class GameManager {
       if (!resultForGameOver.isMatch && !resultForFutureMoves)
         this.gameOver()
 
+      let combo = 1
       if (resultForGameOver.isMatch) {
         do {
+          combo++
           await this.matchAgain(resultForGameOver.piece)
           resultForGameOver = map.isBoardMatch(map.getCurrentMap())
+          console.log(`${combo}x combo`)
         } while (resultForGameOver.isMatch)
 
         if (!map.isExistantFutureMoves(map.getCurrentMap()))
@@ -258,7 +261,6 @@ export default class GameManager {
 
   public gameOver() {
     this.GOMenu = gameScene.add.image(INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH / 2 - 20, 500, 'ScoreMenu').setDepth(1).setOrigin(0, 0).setScale(2)
-    console.log(this.GOMenu)
     this.GOBtn = gameScene.add.image(this.GOMenu.x + this.GOMenu.width - 188, this.GOMenu.y + 250, 'RestartButton').setDepth(1).setOrigin(0, 0)
     this.GOBtn.setInteractive({ useHandCursor: true })
 
