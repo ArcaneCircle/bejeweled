@@ -88,7 +88,7 @@ export default class GameManager {
   private async scoreAndLevelUp(pieces: Piece[]) {
     const scoreType = recognizeScoreType(pieces)
     await this.scoreIt(scoreType, pieces)
-    // save map with every point
+    // save map and score with every point
     window.localStorage.setItem('dejeweled-map', JSON.stringify(getPieceTypeList(map.getCurrentMap())))
     window.localStorage.setItem('dejeweled-score', this.score.toString())
 
@@ -163,7 +163,11 @@ export default class GameManager {
     const tileX = average(arrayXValues) as TileNumbers
     const tileY = average(arrayYValues) as TileNumbers
     const color = getPieceHashColor(pieces[0]) ?? undefined
-    this.insertModalText(score, convertTileToPosition({ tileX, tileY }), 'score', color)
+    this.insertModalText(`+${score}`, convertTileToPosition({ tileX, tileY }), 'score', color)
+  }
+
+  comboUI(combo: number, x = 100, y = 100) {
+    this.insertModalText(`${combo}x combo`, { x, y }, 'combo', '#df8e73')
   }
 
   private async updateLevelBar() {
@@ -238,10 +242,13 @@ export default class GameManager {
       let combo = 1
       if (resultForGameOver.isMatch) {
         do {
-          combo++
           await this.matchAgain(resultForGameOver.piece)
-          resultForGameOver = map.isBoardMatch(map.getCurrentMap())
+          combo++
           console.log(`${combo}x combo`)
+          this.comboUI(combo, 720, 1490)
+          this.score += combo * 100
+          await timeout(500)
+          resultForGameOver = map.isBoardMatch(map.getCurrentMap())
         } while (resultForGameOver.isMatch)
 
         if (!map.isExistantFutureMoves(map.getCurrentMap()))
