@@ -292,7 +292,7 @@ export default class GameManager {
 
     const XMiddle = this.GOMenu.x + this.GOMenu.width / 2
 
-    this.GOHeader = gameScene.add.text(XMiddle - 225, 520, 'GAME OVER', { font: 'bold 70px Calibri', color: '#FFF980' }).setDepth(1).setOrigin(0, 0)
+    this.GOHeader = gameScene.add.text(XMiddle, 520, 'GAME OVER', { font: 'bold 72px Calibri', color: '#FFF980' }).setDepth(1).setOrigin(0.5, 0)
 
     this.GOBtn = gameScene.add.image(XMiddle - 188, this.GOMenu.y + 320, 'ButtonReset').setDepth(1).setOrigin(0, 0)
     this.GOBtn.setInteractive({ useHandCursor: true })
