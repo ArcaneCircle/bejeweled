@@ -109,7 +109,7 @@ export default class GameManager {
 
   private insertModalText(text: string | number, { x, y }: PositionInPixel, _type = 'normal', color = '#ffffff', duration = 600) {
     const levelText = gameScene.add.text(x, y, text.toString(), {
-      font: 'bold 63px Geneva',
+      font: 'bold 63px Calibri',
       stroke: '#000000',
       strokeThickness: 10,
       color,
@@ -292,12 +292,12 @@ export default class GameManager {
 
     const XMiddle = this.GOMenu.x + this.GOMenu.width / 2
 
-    this.GOHeader = gameScene.add.text(XMiddle - 225, 520, 'GAME OVER', { font: 'bold 70px Geneva', color: '#FFF980' }).setDepth(1).setOrigin(0, 0)
+    this.GOHeader = gameScene.add.text(XMiddle - 225, 520, 'GAME OVER', { font: 'bold 70px Calibri', color: '#FFF980' }).setDepth(1).setOrigin(0, 0)
 
     this.GOBtn = gameScene.add.image(XMiddle - 188, this.GOMenu.y + 320, 'ButtonReset').setDepth(1).setOrigin(0, 0)
     this.GOBtn.setInteractive({ useHandCursor: true })
 
-    this.GOText = gameScene.add.text(XMiddle, this.GOMenu.y + 200, `Score: ${this.score}`, { font: 'bold 53px Geneva', color: '#FFF980' }).setDepth(1).setOrigin(0.5, 0)
+    this.GOText = gameScene.add.text(XMiddle, this.GOMenu.y + 200, `Score: ${this.score}`, { font: 'bold 53px Calibri', color: '#FFF980' }).setDepth(1).setOrigin(0.5, 0)
 
     window.highscores.setScore(this.score)
 
