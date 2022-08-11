@@ -12,7 +12,6 @@ import selectedTile from '/assets/selectedTile.png'
 import LevelBar from '/assets/levelbar.jpg'
 import ButtonReset from '/assets/buttonReset.png'
 import ButtonMenu from '/assets/buttonMenu.png'
-import ScoreMenu from '/assets/scoreMenu.jpg'
 import bubble1 from '/assets/bubble_single_1.mp3'
 import bubble2 from '/assets/bubble_single_2.mp3'
 import bubble3 from '/assets/bubble_single_3.mp3'
@@ -37,7 +36,6 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('LevelBar', LevelBar)
     this.load.image('ButtonReset', ButtonReset)
     this.load.image('ButtonMenu', ButtonMenu)
-    this.load.image('ScoreMenu', ScoreMenu)
 
     this.load.audio('bubble1', bubble1)
     this.load.audio('bubble2', bubble2)
@@ -63,8 +61,8 @@ export default class GameScene extends Phaser.Scene {
 
     buttonMenu = this.add.image(this.cameras.main.centerX, 1370 + 320, 'ButtonMenu').setDepth(1).setOrigin(0.5, 0)
     buttonMenu.setInteractive({ useHandCursor: true })
-    // buttonMenu.on('pointerup', () => this.scene.start('MenuScene'))
-    buttonMenu.on('pointerup', () => gameManager.gameOver())
+    buttonMenu.on('pointerup', () => this.scene.start('MenuScene'))
+    // buttonMenu.on('pointerup', () => gameManager.gameOver())
 
     scoreText = this.add.text(this.cameras.main.centerX, 1370 + 120, 'Score: 0', { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0.5, 0)
     levelText = this.add.text(this.cameras.main.centerX, 1370 + 40, 'Level: 1', { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0.5, 0)

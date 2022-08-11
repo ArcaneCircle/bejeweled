@@ -24,7 +24,8 @@ export default class GameManager {
   previousScoreObjective!: number
   isPieceSelectedInFrame = false
   isMoving = false
-  GOMenu: null | Phaser.GameObjects.Image = null
+  GOMenu: null | Phaser.GameObjects.Image | Phaser.GameObjects.Rectangle = null
+  GOHeader: null | Phaser.GameObjects.Text = null
   GOBtn: null | Phaser.GameObjects.Image = null
   GOText: null | Phaser.GameObjects.Text = null
 
@@ -66,6 +67,8 @@ export default class GameManager {
       this.GOBtn.destroy()
     if (this.GOText)
       this.GOText.destroy()
+    if (this.GOHeader)
+      this.GOHeader.destroy()
   }
 
   public changeCurrentSelectedPiece(newPiece: Piece): Piece {
@@ -278,11 +281,16 @@ export default class GameManager {
   }
 
   public gameOver() {
-    this.GOMenu = gameScene.add.image(INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH / 2 - 20, 500, 'ScoreMenu').setDepth(1).setOrigin(0, 0).setScale(2)
-    this.GOBtn = gameScene.add.image(this.GOMenu.x + this.GOMenu.width - 188, this.GOMenu.y + 250, 'RestartButton').setDepth(1).setOrigin(0, 0)
+    this.GOMenu = gameScene.add.rectangle(INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH / 2 - 20, 500, 1230, 450, 14101760, 0.8).setDepth(1).setOrigin(0, 0)
+
+    const XMiddle = this.GOMenu.x + this.GOMenu.width / 2
+
+    this.GOHeader = gameScene.add.text(XMiddle - 225, 520, 'GAME OVER', { font: 'bold 70px Geneva', color: '#FFF980' }).setDepth(1).setOrigin(0, 0)
+
+    this.GOBtn = gameScene.add.image(XMiddle - 188, this.GOMenu.y + 320, 'ButtonReset').setDepth(1).setOrigin(0, 0)
     this.GOBtn.setInteractive({ useHandCursor: true })
 
-    this.GOText = gameScene.add.text(this.GOMenu.x + this.GOMenu.width, this.GOMenu.y + 200, this.score.toString(), { font: 'bold 53px Geneva' }).setDepth(1).setOrigin(0.5, 0)
+    this.GOText = gameScene.add.text(XMiddle, this.GOMenu.y + 200, `Score: ${this.score}`, { font: 'bold 53px Geneva', color: '#FFF980' }).setDepth(1).setOrigin(0.5, 0)
 
     window.highscores.setScore(this.score)
 
@@ -290,6 +298,7 @@ export default class GameManager {
       this.GOBtn && this.GOBtn.destroy()
       this.GOMenu && this.GOMenu.destroy()
       this.GOText && this.GOText.destroy()
+      this.GOHeader && this.GOHeader.destroy()
       this.reset()
     })
   }
