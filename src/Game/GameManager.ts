@@ -225,8 +225,11 @@ export default class GameManager {
         await this.matchIt(matchArrOfPieces)
         combo++
         console.log(`${combo}x combo`)
-        if (combo > 1)
+        if (combo > 1) {
           this.comboUI(combo, 720, 1490)
+          this.score += combo * 100
+          await this.updateLevelBar()
+        }
       }
 
       let opositePieceMatchArr: Piece[] = []
@@ -241,8 +244,11 @@ export default class GameManager {
         await this.matchIt(opositePieceMatchArr)
         combo++
         console.log(`${combo}x combo`)
-        if (combo > 1)
+        if (combo > 1) {
           this.comboUI(combo, 720, 1490)
+          this.score += combo * 100
+          await this.updateLevelBar()
+        }
       }
 
       if (opositePieceMatchArr.length <= 0 && matchArrOfPieces.length <= 0)
@@ -261,6 +267,7 @@ export default class GameManager {
           console.log(`${combo}x combo`)
           this.comboUI(combo, 720, 1490)
           this.score += combo * 100
+          await this.updateLevelBar()
           // await timeout(1000)
           resultForGameOver = map.isBoardMatch(map.getCurrentMap())
         } while (resultForGameOver.isMatch)
