@@ -18,7 +18,6 @@ export default class MenuScene extends Phaser.Scene {
   }
 
   create() {
-    window.highscores.init('Dejeweled')
     this.cameras.main.setBackgroundColor('#000')
     this.add.image(this.cameras.main.centerX, 150, 'logo').setDepth(1).setOrigin(0.5, 0).setScale(6)
 

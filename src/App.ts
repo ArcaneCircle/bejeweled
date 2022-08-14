@@ -2,6 +2,8 @@ import GameScene from './Scenes/GameScene'
 import MenuScene from './Scenes/MenuScene'
 import './phaser-core.min.js'
 
+window.highscores.init('Dejeweled')
+
 export const config = {
   type: Phaser.AUTO,
   scale: {

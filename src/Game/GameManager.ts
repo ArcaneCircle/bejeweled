@@ -35,7 +35,6 @@ export default class GameManager {
   }
 
   private start() {
-    window.highscores.init('Dejeweled')
     this.resetScoreAndLevel()
     this.map = new Map()
     this.checkMatches()
