@@ -249,9 +249,11 @@ export default class Map {
     if (isNumberInsideBoard(direction === 'horizontal' ? tileX : tileY)) {
       pieceSelected = map[tileX][tileY]
       while (pieceSelected && pieceSelected.pieceTypeByLetter === pieceTypeByLetter) {
-        // TODO: check ortogonals here
+        // check ortogonals here for every case
+        const otherMatches = this.checkOrtogonalPieces(map, pieceSelected, direction)
+
         nextMatch += currentValueSide < 0 ? -1 : 1
-        arrOfPiecesToMatch.push(pieceSelected)
+        arrOfPiecesToMatch.push(pieceSelected, ...otherMatches)
         tileX = direction === 'horizontal' ? piece.currentTile.tileX + (currentValueSide + nextMatch) : piece.currentTile.tileX
         tileY = direction === 'horizontal' ? piece.currentTile.tileY : piece.currentTile.tileY + (currentValueSide + nextMatch)
         if (!isNumberInsideBoard(direction === 'horizontal' ? tileX : tileY))
