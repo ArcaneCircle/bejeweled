@@ -235,7 +235,7 @@ export default class Map {
         additionalMatches.push(map[direction === 'horizontal' ? side1X : extendedIndex2][direction === 'horizontal' ? extendedIndex2 : side1Y])
         extendedIndex2++
       }
-      console.log(direction, additionalMatches.map(m => m.currentTile))
+      // console.log(direction, additionalMatches.map(m => m.currentTile))
     }
     return additionalMatches
   }
