@@ -46,9 +46,9 @@ export default class Map {
   createFakeMap() {
     const newFakeMap: Piece[][] = []
     const fakeMap = [ // No match
-      ['g', 'y', 'b', 'g', 'y', 'g', 'p', 'p'],
-      ['w', 'w', 'y', 'y', 'g', 'y', 'y', 'g'],
-      ['w', 'g', 'r', 'y', 'g', 'p', 'r', 'p'],
+      ['g', 'y', 'b', 'g', 'y', 'w', 'b', 'p'],
+      ['w', 'w', 'y', 'y', 'g', 'y', 'w', 'w'],
+      ['w', 'g', 'r', 'y', 'g', 'w', 'p', 'p'],
       ['r', 'w', 'b', 'w', 'r', 'w', 'r', 'b'],
       ['w', 'y', 'g', 'r', 'w', 'b', 'w', 'b'],
       ['w', 'y', 'y', 'w', 'w', 'p', 'g', 'r'],
@@ -191,16 +191,20 @@ export default class Map {
         tileY = piece.currentTile.tileY + arr[i] as TileNumbers
       }
 
+      // fix here
       if (isNumberInsideBoard(i >= 2 ? tileY : tileX)) {
         const pieceSelected = map[tileX][tileY]
         if (pieceSelected && pieceSelected.pieceTypeByLetter === pieceTypeByLetter) {
           arrOfPiecesToMatch.push(pieceSelected) // Second Piece
           const obj = this.checkAdjacentForMatch(map, pieceSelected, piece, arrOfPiecesToMatch, arr[i], direction) // Third and more Pieces
-
           if (obj.matchArrOfPieces.length >= 3)
             matchArrOfPieces = matchArrOfPieces.concat(obj.matchArrOfPieces)
+
           finalMap = obj.finalMap
         }
+
+        const otherMatches = this.checkOrtogonalPieces(map, pieceSelected, direction)
+        matchArrOfPieces = matchArrOfPieces.concat(otherMatches)
       }
     }
 
@@ -209,6 +213,41 @@ export default class Map {
     return { matchArrOfPieces, finalMap }
   }
 
+  private checkOrtogonalPieces(map: Piece[][], piece: Piece, direction: 'horizontal' | 'vertical') {
+    let side1X = piece.currentTile.tileX
+    let side2X = piece.currentTile.tileX
+    let side1Y = piece.currentTile.tileY
+    let side2Y = piece.currentTile.tileY
+    const additionalMatches = [] as Piece[]
+    if (direction === 'horizontal') {
+      side1Y = piece.currentTile.tileY - 1 as TileNumbers
+      side2Y = piece.currentTile.tileY + 1 as TileNumbers
+    }
+    else {
+      side1X = piece.currentTile.tileX - 1 as TileNumbers
+      side2X = piece.currentTile.tileX + 1 as TileNumbers
+    }
+    if (isNumberInsideBoard(side1X) && isNumberInsideBoard(side1Y) && isNumberInsideBoard(side2X) && isNumberInsideBoard(side2Y) && map[side1X][side1Y].pieceTypeByLetter === piece.pieceTypeByLetter && piece.pieceTypeByLetter === map[side2X][side2Y].pieceTypeByLetter) {
+      // son del mismo tipo y están en el tablero
+      additionalMatches.push(map[side1X][side1Y], piece, map[side2X][side2Y])
+
+      // check for extended matches
+      let extendedIndex1 = direction === 'horizontal' ? side1Y - 1 : side1X - 1
+      while (isNumberInsideBoard(extendedIndex1) && map[direction === 'horizontal' ? side1X : extendedIndex1][direction === 'horizontal' ? extendedIndex1 : side1Y].pieceTypeByLetter === piece.pieceTypeByLetter) {
+        additionalMatches.push(map[direction === 'horizontal' ? side1X : extendedIndex1][direction === 'horizontal' ? extendedIndex1 : side1Y])
+        extendedIndex1--
+      }
+      let extendedIndex2 = direction === 'horizontal' ? side1Y + 1 : side1X + 1
+      while (isNumberInsideBoard(extendedIndex2) && map[direction === 'horizontal' ? side1X : extendedIndex2][direction === 'horizontal' ? extendedIndex2 : side1Y].pieceTypeByLetter === piece.pieceTypeByLetter) {
+        additionalMatches.push(map[direction === 'horizontal' ? side1X : extendedIndex2][direction === 'horizontal' ? extendedIndex2 : side1Y])
+        extendedIndex2++
+      }
+      console.log(direction, additionalMatches.map(m => m.currentTile))
+    }
+    return additionalMatches
+  }
+
+  // check
   private checkAdjacentForMatch(map, pieceSelected, piece, arrOfPiecesToMatch, currentValueSide, direction: 'horizontal' | 'vertical'): { matchArrOfPieces: Piece[]; finalMap: Piece[][] } {
     const { pieceTypeByLetter } = piece
     let nextMatch = currentValueSide < 0 ? -1 : 1
@@ -224,6 +263,8 @@ export default class Map {
         tileY = direction === 'horizontal' ? piece.currentTile.tileY : piece.currentTile.tileY + (currentValueSide + nextMatch)
         if (!isNumberInsideBoard(direction === 'horizontal' ? tileX : tileY))
           break
+
+        // console.log(direction)
         pieceSelected = map[tileX][tileY]
       }
     }
