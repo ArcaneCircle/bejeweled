@@ -214,19 +214,12 @@ export default class Map {
   }
 
   private checkOrtogonalPieces(map: Piece[][], piece: Piece, direction: 'horizontal' | 'vertical') {
-    let side1X = piece.currentTile.tileX
-    let side2X = piece.currentTile.tileX
-    let side1Y = piece.currentTile.tileY
-    let side2Y = piece.currentTile.tileY
     const additionalMatches = [] as Piece[]
-    if (direction === 'horizontal') {
-      side1Y = piece.currentTile.tileY - 1 as TileNumbers
-      side2Y = piece.currentTile.tileY + 1 as TileNumbers
-    }
-    else {
-      side1X = piece.currentTile.tileX - 1 as TileNumbers
-      side2X = piece.currentTile.tileX + 1 as TileNumbers
-    }
+    const side1X = direction === 'horizontal' ? piece.currentTile.tileX : piece.currentTile.tileX - 1 as TileNumbers
+    const side2X = direction === 'horizontal' ? piece.currentTile.tileX : piece.currentTile.tileX + 1 as TileNumbers
+    const side1Y = direction === 'horizontal' ? piece.currentTile.tileY - 1 as TileNumbers : piece.currentTile.tileY
+    const side2Y = direction === 'horizontal' ? piece.currentTile.tileY + 1 as TileNumbers : piece.currentTile.tileY
+
     if (isNumberInsideBoard(side1X) && isNumberInsideBoard(side1Y) && isNumberInsideBoard(side2X) && isNumberInsideBoard(side2Y) && map[side1X][side1Y].pieceTypeByLetter === piece.pieceTypeByLetter && piece.pieceTypeByLetter === map[side2X][side2Y].pieceTypeByLetter) {
       // son del mismo tipo y están en el tablero
       additionalMatches.push(map[side1X][side1Y], piece, map[side2X][side2Y])
@@ -247,7 +240,6 @@ export default class Map {
     return additionalMatches
   }
 
-  // check
   private checkAdjacentForMatch(map, pieceSelected, piece, arrOfPiecesToMatch, currentValueSide, direction: 'horizontal' | 'vertical'): { matchArrOfPieces: Piece[]; finalMap: Piece[][] } {
     const { pieceTypeByLetter } = piece
     let nextMatch = currentValueSide < 0 ? -1 : 1
@@ -257,6 +249,7 @@ export default class Map {
     if (isNumberInsideBoard(direction === 'horizontal' ? tileX : tileY)) {
       pieceSelected = map[tileX][tileY]
       while (pieceSelected && pieceSelected.pieceTypeByLetter === pieceTypeByLetter) {
+        // TODO: check ortogonals here
         nextMatch += currentValueSide < 0 ? -1 : 1
         arrOfPiecesToMatch.push(pieceSelected)
         tileX = direction === 'horizontal' ? piece.currentTile.tileX + (currentValueSide + nextMatch) : piece.currentTile.tileX
