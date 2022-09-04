@@ -163,7 +163,7 @@ export const recognizeScoreType = (pieces: Piece[]): ScoreTypes => {
 }
 
 export const getPieceTypeList = (map: Piece[][]) => {
-  const arr = [[]] as unknown as PIECE_TYPES
+  const arr = [[]] as unknown as string[][]
   for (let i = 0; i < MAP.TOTAL_TILES_WIDTH; i++) {
     arr[i] = []
     for (let j = 0; j < MAP.TOTAL_TILES_HEIGHT; j++)
