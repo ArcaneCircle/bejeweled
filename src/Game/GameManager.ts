@@ -90,8 +90,9 @@ export default class GameManager {
   private async scoreAndLevelUp(pieces: Piece[]) {
     const scoreType = recognizeScoreType(pieces)
     await this.scoreIt(scoreType, pieces)
-    // save map and score with every point
-    window.localStorage.setItem('dejeweled-map', JSON.stringify(getPieceTypeList(map.getCurrentMap())))
+    // save map and score with every point (make sure map is valid)
+    const typesArr = getPieceTypeList(map.getCurrentMap())
+    typesArr && window.localStorage.setItem('dejeweled-map', JSON.stringify(typesArr))
     window.localStorage.setItem('dejeweled-score', this.score.toString())
 
     if (this.score >= this.scoreObjective)
@@ -216,8 +217,10 @@ export default class GameManager {
       let combo = 0
       const { matchArrOfPieces, finalMap } = map.checkMatch(map.getCurrentMap(), this.lastPiece)
       if (finalMap && finalMap.length > 0) {
+        // console.log(finalMap, '\n mapa final [pieceMovement method]')
         map.setCurrentMap(finalMap)
-        window.localStorage.setItem('dejeweled-map', JSON.stringify(getPieceTypeList(finalMap)))
+        const typesArr = getPieceTypeList(finalMap)
+        typesArr && window.localStorage.setItem('dejeweled-map', JSON.stringify(typesArr))
       }
 
       if (matchArrOfPieces.length >= 3) {
@@ -231,16 +234,15 @@ export default class GameManager {
         }
       }
 
-      let opositePieceMatchArr: Piece[] = []
-      const opositePieceResponse = map.checkMatch(map.getCurrentMap(), pieceToSwitch)
-      if (opositePieceResponse.finalMap && opositePieceResponse.matchArrOfPieces.length > 0) {
-        map.setCurrentMap(opositePieceResponse.finalMap)
-        window.localStorage.setItem('dejeweled-map', JSON.stringify(getPieceTypeList(opositePieceResponse.finalMap)))
-        opositePieceMatchArr = opositePieceResponse.matchArrOfPieces
+      const { matchArrOfPieces: opositeArr, finalMap: opositeMap } = map.checkMatch(map.getCurrentMap(), pieceToSwitch)
+      if (opositeMap && opositeMap.length > 0) {
+        map.setCurrentMap(opositeMap)
+        const typesArr = getPieceTypeList(opositeMap)
+        typesArr && window.localStorage.setItem('dejeweled-map', JSON.stringify(typesArr))
       }
 
-      if (opositePieceMatchArr.length >= 3) {
-        await this.matchIt(opositePieceMatchArr)
+      if (opositeArr.length >= 3) {
+        await this.matchIt(opositeArr)
         combo++
         console.log(`${combo}x combo`)
         if (combo > 1) {
@@ -250,7 +252,7 @@ export default class GameManager {
         }
       }
 
-      if (opositePieceMatchArr.length <= 0 && matchArrOfPieces.length <= 0)
+      if (opositeArr.length <= 0 && matchArrOfPieces.length <= 0)
         await pieceToSwitch.switch(this.lastPiece)
 
       let resultForGameOver = map.isBoardMatch(map.getCurrentMap())
