@@ -234,7 +234,8 @@ export default class GameManager {
         }
       }
 
-      const { matchArrOfPieces: opositeArr, finalMap: opositeMap } = map.checkMatch(map.getCurrentMap(), pieceToSwitch)
+      const { matchArrOfPieces: opositeArr } = map.checkMatch(map.getCurrentMap(), pieceToSwitch)
+      // const { matchArrOfPieces: opositeArr, finalMap: opositeMap } = map.checkMatch(map.getCurrentMap(), pieceToSwitch)
       // if (opositeMap && opositeMap.length > 0) {
       //   map.setCurrentMap(opositeMap)
       //   const typesArr = getPieceTypeList(opositeMap)
