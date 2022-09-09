@@ -26,7 +26,8 @@ export default class GameManager {
   isMoving = false
   GOMenu: null | Phaser.GameObjects.Image | Phaser.GameObjects.Rectangle = null
   GOHeader: null | Phaser.GameObjects.Text = null
-  GOBtn: null | Phaser.GameObjects.Image = null
+  GOBtnRectangle: null | Phaser.GameObjects.Rectangle = null
+  GOBtnText: null | Phaser.GameObjects.Text = null
   GOText: null | Phaser.GameObjects.Text = null
 
   constructor() {
@@ -62,8 +63,10 @@ export default class GameManager {
     // this.gameOver()
     if (this.GOMenu)
       this.GOMenu.destroy()
-    if (this.GOBtn)
-      this.GOBtn.destroy()
+    if (this.GOBtnRectangle)
+      this.GOBtnRectangle.destroy()
+    if (this.GOBtnText)
+      this.GOBtnText.destroy()
     if (this.GOText)
       this.GOText.destroy()
     if (this.GOHeader)
@@ -296,15 +299,18 @@ export default class GameManager {
 
     this.GOHeader = gameScene.add.text(XMiddle, 520, 'GAME OVER', { font: 'bold 72px Calibri', color: '#FFF980' }).setDepth(1).setOrigin(0.5, 0)
 
-    this.GOBtn = gameScene.add.image(XMiddle - 188, this.GOMenu.y + 320, 'ButtonReset').setDepth(1).setOrigin(0, 0)
-    this.GOBtn.setInteractive({ useHandCursor: true })
+    this.GOBtnRectangle = gameScene.add.rectangle(XMiddle, this.GOMenu.y + 320, 400, 80, 16775552, 0.8).setDepth(1).setOrigin(0.5, 0)
+    this.GOBtnRectangle.setInteractive({ useHandCursor: true })
+
+    this.GOBtnText = gameScene.add.text(XMiddle, this.GOMenu.y + 330, 'RESTART', { font: 'bold 53px Calibri', color: '#ac2400' }).setDepth(1).setOrigin(0.5, 0)
 
     this.GOText = gameScene.add.text(XMiddle, this.GOMenu.y + 200, `Score: ${this.score}`, { font: 'bold 53px Calibri', color: '#FFF980' }).setDepth(1).setOrigin(0.5, 0)
 
     window.highscores.setScore(this.score)
 
-    this.GOBtn.on('pointerup', () => {
-      this.GOBtn && this.GOBtn.destroy()
+    this.GOBtnRectangle.on('pointerup', () => {
+      this.GOBtnRectangle && this.GOBtnRectangle.destroy()
+      this.GOBtnText && this.GOBtnText.destroy()
       this.GOMenu && this.GOMenu.destroy()
       this.GOText && this.GOText.destroy()
       this.GOHeader && this.GOHeader.destroy()
