@@ -10,8 +10,6 @@ import backgroundBoard from '/assets/background_board.png'
 import Border from '/assets/Border.png'
 import selectedTile from '/assets/selectedTile.png'
 import LevelBar from '/assets/levelbar.jpg'
-import ButtonReset from '/assets/buttonReset.png'
-import ButtonMenu from '/assets/buttonMenu.png'
 import bubble1 from '/assets/bubble_single_1.mp3'
 import bubble2 from '/assets/bubble_single_2.mp3'
 import bubble3 from '/assets/bubble_single_3.mp3'
@@ -34,8 +32,6 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('Border', Border)
     this.load.image('selectedTile', selectedTile)
     this.load.image('LevelBar', LevelBar)
-    this.load.image('ButtonReset', ButtonReset)
-    this.load.image('ButtonMenu', ButtonMenu)
 
     this.load.audio('bubble1', bubble1)
     this.load.audio('bubble2', bubble2)
