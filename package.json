@@ -1,5 +1,6 @@
 {
   "name": "dejeweled",
+  "version": "1.0.1",
   "private": true,
   "packageManager": "pnpm@7.3.0",
   "scripts": {
@@ -39,6 +40,5 @@
   "eslintIgnore": [
     "webxdc.js",
     "webxdc.d.ts"
-  ],
-  "version": "0.0.1"
+  ]
 }
