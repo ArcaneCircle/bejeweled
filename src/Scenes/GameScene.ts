@@ -18,7 +18,7 @@ import bubble3 from '/assets/bubble_single_3.mp3'
 import pieces from '/assets/pieces.png'
 
 export let gameScene: Phaser.Scene
-export let scoreText, levelText, buttonMenu, buttonReset, buttonResetRectangle, buttonResetText, buttonMenuRectangle, buttonMenuText
+export let scoreText, levelText, buttonResetRectangle, buttonResetText, buttonMenuRectangle, buttonMenuText
 export let levelBarImg: Phaser.GameObjects.Image
 
 export default class GameScene extends Phaser.Scene {
@@ -55,25 +55,20 @@ export default class GameScene extends Phaser.Scene {
     this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 70, 'backgroundBoard').setDepth(1).setOrigin(0.5, 0)
     this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 90, 'Border').setDepth(1).setOrigin(0.5, 0)
 
-    // buttonReset = this.add.image(this.cameras.main.centerX, 1370 + 220, 'ButtonReset').setDepth(1).setOrigin(0.5, 0)
-    // buttonReset.setInteractive({ useHandCursor: true })
-    // buttonReset.on('pointerup', () => gameManager.reset())
-
-    // buttonMenu = this.add.image(this.cameras.main.centerX, 1370 + 320, 'ButtonMenu').setDepth(1).setOrigin(0.5, 0)
-    // buttonMenu.setInteractive({ useHandCursor: true })
-    // buttonMenu.on('pointerup', () => this.scene.start('MenuScene'))
-    // buttonMenu.on('pointerup', () => gameManager.gameOver())
-
     const newLocal = 'bold 53px Calibri'
+
     // use rectangle instead of image
     buttonResetRectangle = this.add.rectangle(this.cameras.main.centerX, 1370 + 220, 400, 80, 14101760, 0.8).setDepth(1).setOrigin(0.5, 0)
     buttonResetRectangle.setInteractive({ useHandCursor: true })
     buttonResetRectangle.on('pointerup', () => gameManager.reset())
+
     buttonResetText = this.add.text(this.cameras.main.centerX, 1370 + 230, 'RESTART', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
 
     buttonMenuRectangle = this.add.rectangle(this.cameras.main.centerX, 1370 + 320, 400, 80, 14101760, 0.8).setDepth(1).setOrigin(0.5, 0)
     buttonMenuRectangle.setInteractive({ useHandCursor: true })
     buttonMenuRectangle.on('pointerup', () => this.scene.start('MenuScene'))
+    // buttonMenuRectangle.on('pointerup', () => gameManager.gameOver())
+
     buttonMenuText = this.add.text(this.cameras.main.centerX, 1370 + 330, 'HIGHSCORES', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
 
     scoreText = this.add.text(this.cameras.main.centerX, 1370 + 120, 'Score: 0', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
