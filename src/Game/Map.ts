@@ -19,8 +19,8 @@ export default class Map {
   }
 
   start() {
-    this.createRealMap()
-    // this.createFakeMap()
+    // this.createRealMap()
+    this.createFakeMap()
   }
 
   public resetMap() {
@@ -211,7 +211,8 @@ export default class Map {
         }
 
         const otherMatches = this.checkOrtogonalPieces(map, pieceSelected, direction)
-        matchArrOfPieces = matchArrOfPieces.concat(otherMatches)
+        // const otherMatches2 = this.checkOrtogonalPieces(map, piece, direction)
+        matchArrOfPieces = removeDuplicates(matchArrOfPieces.concat(otherMatches))
       }
     }
 
