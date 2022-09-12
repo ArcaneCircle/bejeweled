@@ -5,7 +5,7 @@
   "packageManager": "pnpm@7.3.0",
   "scripts": {
     "build": "npm run newversion && vite build && jszip-cli -c jszip.config.json",
-    "newversion": "npm version patch && rr 'version = .+' '\"version = \" + r(\"package\").version' -j manifest.toml && rr 'version = (.+)' 'version = \"$1\"' manifest.toml",
+    "newversion": "npm version patch && rr 'name = .+' '\"name = Dejeweled v\" + r(\"package\").version' -j manifest.toml && rr 'name = (.+)' 'name = \"$1\"' manifest.toml",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview",
