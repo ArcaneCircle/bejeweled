@@ -2,6 +2,8 @@ import '../phaser-core.min.js'
 import { BACKGROUND } from '~/Utils/gameValues'
 import { getScoreboardArray } from '~/Utils/utils'
 
+import TweenHelper from '~/Utils/animate.js'
+
 import title from '/assets/Bejeweled_title.png'
 
 export default class MenuScene extends Phaser.Scene {
@@ -13,8 +15,6 @@ export default class MenuScene extends Phaser.Scene {
 
   preload() {
     this.load.image('logo', title)
-
-    // this.menuGameOver = this.add.group();
   }
 
   create() {
@@ -29,7 +29,9 @@ export default class MenuScene extends Phaser.Scene {
     this.add.text(this.cameras.main.centerX, 700, nameArr, { font: 'bold 70px monospace', align: 'center' }).setDepth(1).setOrigin(0.5, 0)
     this.add.text(1350, 700, scoreArr, { font: 'bold 70px monospace', align: 'right' }).setDepth(1).setOrigin(1, 0)
 
-    this.add.text(this.cameras.main.centerX, BACKGROUND.HEIGHT - 200, 'Press any key to start', { font: 'bold 53px monospace', color: '#c94cb1' }).setDepth(1).setOrigin(0.5)
+    // Add play text
+    const text = this.add.text(this.cameras.main.centerX, BACKGROUND.HEIGHT - 200, 'click to play', { font: 'bold 53px monospace', color: '#c94cb1' }).setDepth(1).setOrigin(0.5)
+    TweenHelper.flashElement(this, text)
 
     this.input.on('pointerup', () => {
       this.scene.start('GameScene')
