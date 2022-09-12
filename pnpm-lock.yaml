@@ -11,6 +11,7 @@ specifiers:
   lodash: ^4.17.21
   phaser: ^3.55.2
   phaser3-rex-plugins: ^1.1.71
+  rexreplace: ^7.0.7
   rollup-plugin-terser: ^7.0.2
   typescript: ^4.7.4
   unplugin-auto-import: ^0.7.2
@@ -31,6 +32,7 @@ devDependencies:
   eruda: 2.4.1
   eslint: 8.18.0
   jsdom: 19.0.0
+  rexreplace: 7.0.7
   rollup-plugin-terser: 7.0.2
   typescript: 4.7.4
   unplugin-auto-import: 0.7.2_vite@2.9.13
@@ -2087,6 +2089,12 @@ packages:
       slash: 3.0.0
     dev: true
 
+  /globs/0.1.4:
+    resolution: {integrity: sha512-D23dWbOq48vlOraoSigbcQV4tWrnhwk+E/Um2cMuDS3/5dwGmdFeA7L/vAvDhLFlQOTDqHcXh35m/71g2A2WzQ==}
+    dependencies:
+      glob: 7.2.3
+    dev: true
+
   /graceful-fs/4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
     dev: true
@@ -3285,6 +3293,14 @@ packages:
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
     dev: true
 
+  /rexreplace/7.0.7:
+    resolution: {integrity: sha512-Z1PCF2Ns3x2nviYAJqVtzzGBfacvJ6vwOBmiM/zApBRhNua7HTN67SGjZ52sc3L0SQQ/kDxCzT0645T8kpkcWQ==}
+    hasBin: true
+    dependencies:
+      globs: 0.1.4
+      yargs: 16.2.0
+    dev: true
+
   /rimraf/3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     hasBin: true
@@ -4179,9 +4195,27 @@ packages:
     engines: {node: '>= 6'}
     dev: true
 
+  /yargs-parser/20.2.9:
+    resolution: {integrity: sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==}
+    engines: {node: '>=10'}
+    dev: true
+
   /yargs-parser/21.0.1:
     resolution: {integrity: sha512-9BK1jFpLzJROCI5TzwZL/TU4gqjK5xiHV/RfWLOahrjAko/e4DJkRDZQXfvqAsiZzzYhgAzbgz6lg48jcm4GLg==}
     engines: {node: '>=12'}
+    dev: true
+
+  /yargs/16.2.0:
+    resolution: {integrity: sha512-D1mvvtDG0L5ft/jGWkLpG1+m0eQxOfaBvTNELraWj22wSVUMWxZUvYgJYcKh6jGGIkJFhH4IZPQhR4TKpc8mBw==}
+    engines: {node: '>=10'}
+    dependencies:
+      cliui: 7.0.4
+      escalade: 3.1.1
+      get-caller-file: 2.0.5
+      require-directory: 2.1.1
+      string-width: 4.2.3
+      y18n: 5.0.8
+      yargs-parser: 20.2.9
     dev: true
 
   /yargs/17.5.1:
