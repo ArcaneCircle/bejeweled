@@ -19,8 +19,8 @@ export default class Map {
   }
 
   start() {
-    // this.createRealMap()
-    this.createFakeMap()
+    this.createRealMap()
+    // this.createFakeMap()
   }
 
   public resetMap() {
