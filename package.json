@@ -5,7 +5,7 @@
   "packageManager": "pnpm@7.3.0",
   "scripts": {
     "build": "vite build && jszip-cli -c jszip.config.json",
-    "newversion": "npm version patch && TEST=$(npm pkg get version) rr 'version = .+' '\"version = \" + r(\"package\").version' -j manifest.toml",
+    "newversion": "npm version patch && TEST=$(npm pkg get version) rr 'version = .+' '\"version = \" + \"\"\" + r(\"package\").version + \"\"\"' -j manifest.toml",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview",
