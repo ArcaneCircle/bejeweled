@@ -1,3 +1,4 @@
+import Phaser from 'phaser'
 import { gameScene } from '../Scenes/GameScene'
 import type { PIECE_TYPES, PositionInPixel, PositionInTile } from '../game.interfaces'
 import { convertPositionToTile, convertTileToPosition, getPieceTypeEnum, getPieceTypeNumber } from '../Utils/utils'
