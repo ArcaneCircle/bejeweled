@@ -50,9 +50,9 @@ export default class Map {
       ['w', 'w', 'y', 'y', 'g', 'y', 'w', 'w'],
       ['w', 'g', 'r', 'y', 'g', 'w', 'p', 'p'],
       ['r', 'w', 'b', 'w', 'r', 'w', 'r', 'b'],
-      ['w', 'y', 'g', 'r', 'w', 'b', 'w', 'b'],
-      ['w', 'y', 'y', 'w', 'w', 'p', 'g', 'r'],
-      ['p', 'w', 'b', 'p', 'g', 'p', 'g', 'y'],
+      ['w', 'w', 'y', 'r', 'w', 'b', 'w', 'b'],
+      ['w', 'y', 'b', 'y', 'w', 'p', 'g', 'r'],
+      ['p', 'w', 'y', 'p', 'g', 'p', 'g', 'y'],
       ['w', 'b', 'b', 'w', 'y', 'w', 'p', 'y'],
     ]
 
@@ -186,7 +186,6 @@ export default class Map {
     let arrOfPiecesToMatch: Piece[] = [piece] // First Piece
     let direction: 'horizontal' | 'vertical' = 'horizontal'
     let matchArrOfPieces: Piece[] = []
-    // let finalMap: Piece[][] = []
     for (let i = 0; i < 4; i++) {
       let tileX = piece.currentTile.tileX + arr[i]
       let { tileY } = piece.currentTile
@@ -198,7 +197,7 @@ export default class Map {
         tileY = piece.currentTile.tileY + arr[i] as TileNumbers
       }
 
-      // fix here
+      // FIXME: check need of checkOrtogonalPieces when it's already included in checkAdjacentForMatch
       if (isNumberInsideBoard(i >= 2 ? tileY : tileX)) {
         const pieceSelected = map[tileX][tileY]
         if (pieceSelected && pieceSelected.pieceTypeByLetter === pieceTypeByLetter) {
@@ -206,13 +205,7 @@ export default class Map {
           const obj = this.checkAdjacentForMatch(map, pieceSelected, piece, arrOfPiecesToMatch, arr[i], direction) // Third and more Pieces
           if (obj.matchArrOfPieces.length >= 3)
             matchArrOfPieces = matchArrOfPieces.concat(obj.matchArrOfPieces)
-
-          // finalMap = obj.finalMap
         }
-
-        const otherMatches = this.checkOrtogonalPieces(map, pieceSelected, direction)
-        // const otherMatches2 = this.checkOrtogonalPieces(map, piece, direction)
-        matchArrOfPieces = removeDuplicates(matchArrOfPieces.concat(otherMatches))
       }
     }
 
