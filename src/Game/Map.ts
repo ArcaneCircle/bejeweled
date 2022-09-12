@@ -173,13 +173,20 @@ export default class Map {
     return false
   }
 
-  public checkMatch(map: Piece[][], piece: Piece): { matchArrOfPieces: Piece[]; finalMap: Piece[][] } {
+  /**
+   * Check if there's a match for the current piece
+   * and returns an array with pieces to remove
+   * @param {Piece[][]} map Tablero actual
+   * @param {Piece} piece Primera pieza
+   * @returns \{ matchArrOfPieces }
+   */
+  public checkMatch(map: Piece[][], piece: Piece): { matchArrOfPieces: Piece[] } {
     const { pieceTypeByLetter } = piece
     const arr = [1, -1, 1, -1]
     let arrOfPiecesToMatch: Piece[] = [piece] // First Piece
     let direction: 'horizontal' | 'vertical' = 'horizontal'
     let matchArrOfPieces: Piece[] = []
-    let finalMap: Piece[][] = []
+    // let finalMap: Piece[][] = []
     for (let i = 0; i < 4; i++) {
       let tileX = piece.currentTile.tileX + arr[i]
       let { tileY } = piece.currentTile
@@ -200,18 +207,32 @@ export default class Map {
           if (obj.matchArrOfPieces.length >= 3)
             matchArrOfPieces = matchArrOfPieces.concat(obj.matchArrOfPieces)
 
-          finalMap = obj.finalMap
+          // finalMap = obj.finalMap
         }
 
         const otherMatches = this.checkOrtogonalPieces(map, pieceSelected, direction)
-        matchArrOfPieces = matchArrOfPieces.concat(otherMatches)
+        // const otherMatches2 = this.checkOrtogonalPieces(map, piece, direction)
+        matchArrOfPieces = removeDuplicates(matchArrOfPieces.concat(otherMatches))
       }
     }
 
     matchArrOfPieces = removeDuplicates(matchArrOfPieces)
 
-    return { matchArrOfPieces, finalMap }
+    return { matchArrOfPieces }
   }
+
+  // public checkMatchV2(map: Piece[][], piece: Piece): { matchArrOfPieces: Piece[] } {
+  //   let matchArrOfPieces: Piece[] = []
+
+  //   const horizontalMatches = this.checkOrtogonalPieces(map, piece, 'horizontal')
+  //   const verticalMatches = this.checkOrtogonalPieces(map, piece, 'vertical')
+
+  //   matchArrOfPieces = horizontalMatches.concat(verticalMatches)
+
+  //   matchArrOfPieces = removeDuplicates(matchArrOfPieces)
+
+  //   return { matchArrOfPieces }
+  // }
 
   private checkOrtogonalPieces(map: Piece[][], piece: Piece, direction: 'horizontal' | 'vertical') {
     const additionalMatches = [] as Piece[]

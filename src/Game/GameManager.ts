@@ -211,6 +211,7 @@ export default class GameManager {
     return null
   }
 
+  // TODO: work here
   public async piecesMovement(pieceToSwitch: Piece) {
     if (this.isPieceSelectedInFrame && map.isPieceAdjacent(pieceToSwitch)) {
       this.isMoving = true
@@ -218,15 +219,16 @@ export default class GameManager {
       await pieceToSwitch.switch(this.lastPiece)
       // initialize combo counter
       let combo = 0
-      const { matchArrOfPieces, finalMap } = map.checkMatch(map.getCurrentMap(), this.lastPiece)
-      if (finalMap && finalMap.length > 0) {
-        // console.log(finalMap, '\n mapa final [pieceMovement method]')
-        map.setCurrentMap(finalMap)
-        const typesArr = getPieceTypeList(finalMap)
-        typesArr && window.localStorage.setItem('dejeweled-map', JSON.stringify(typesArr))
-      }
+      const { matchArrOfPieces } = map.checkMatch(map.getCurrentMap(), this.lastPiece)
+      // if (finalMap && finalMap.length > 0) {
+      //   // console.log(finalMap, '\n mapa final [pieceMovement method]')
+      //   map.setCurrentMap(finalMap)
+      //   const typesArr = getPieceTypeList(finalMap)
+      //   typesArr && window.localStorage.setItem('dejeweled-map', JSON.stringify(typesArr))
+      // }
 
       if (matchArrOfPieces.length >= 3) {
+        map.setCurrentMap(map.getCurrentMap())
         await this.matchIt(matchArrOfPieces)
         combo++
         console.log(`${combo}x combo`)
@@ -246,6 +248,7 @@ export default class GameManager {
       // }
 
       if (opositeArr.length >= 3) {
+        map.setCurrentMap(map.getCurrentMap())
         await this.matchIt(opositeArr)
         combo++
         console.log(`${combo}x combo`)
@@ -289,6 +292,7 @@ export default class GameManager {
 
   private async matchAgain(piece: Piece) {
     const { matchArrOfPieces } = map.checkMatch(map.getCurrentMap(), piece)
+    map.setCurrentMap(map.getCurrentMap())
     await this.matchIt(matchArrOfPieces)
   }
 
