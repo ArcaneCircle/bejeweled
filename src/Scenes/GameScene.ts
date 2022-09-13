@@ -56,7 +56,7 @@ export default class GameScene extends Phaser.Scene {
     // use rectangle instead of image
     buttonResetRectangle = this.add.rectangle(this.cameras.main.centerX, 1370 + 140, 600, 120, 14101760, 0.8).setDepth(1).setOrigin(0.5, 0)
     buttonResetRectangle.setInteractive({ useHandCursor: true })
-    buttonResetRectangle.on('pointerup', () => gameManager.reset())
+    buttonResetRectangle.on('pointerup', () => !gameManager.isMoving ? gameManager.reset() : null)
 
     buttonResetText = this.add.text(this.cameras.main.centerX, 1370 + 160, 'RESTART', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
 
