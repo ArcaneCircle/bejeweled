@@ -67,10 +67,9 @@ export default class GameScene extends Phaser.Scene {
 
     buttonMenuText = this.add.text(this.cameras.main.centerX, 1370 + 330, 'HIGHSCORES', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
 
-    // move text up
-    scoreText = this.add.text(this.cameras.main.centerX, 50, 'Score: 0', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
-    // scoreText = this.add.text(this.cameras.main.centerX, 1370 + 120, 'Score: 0', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
-    levelText = this.add.text(this.cameras.main.centerX, 1370 + 40, 'Level: 1', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
+    // level and score texts
+    levelText = this.add.text(100, 50, 'Level: 1', { font: newLocal, align: 'left', fixedWidth: 620 }).setDepth(1).setOrigin(0, 0)
+    scoreText = this.add.text(720, 50, 'Score: 0', { font: newLocal, align: 'right', fixedWidth: 620 }).setDepth(1).setOrigin(0, 0)
 
     new GameManager()
   }
