@@ -286,6 +286,12 @@ export default class GameManager {
   }
 
   public gameOver() {
+    this.GOBtnRectangle && this.GOBtnRectangle.destroy()
+    this.GOBtnText && this.GOBtnText.destroy()
+    this.GOMenu && this.GOMenu.destroy()
+    this.GOText && this.GOText.destroy()
+    this.GOHeader && this.GOHeader.destroy()
+
     this.GOMenu = gameScene.add.rectangle(INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH / 2 - 20, 500, 1230, 450, 14101760, 0.8).setDepth(1).setOrigin(0, 0)
 
     const XMiddle = this.GOMenu.x + this.GOMenu.width / 2
