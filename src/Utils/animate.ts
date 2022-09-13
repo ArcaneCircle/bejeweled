@@ -11,7 +11,7 @@ export default class TweenHelper {
           {
             targets: element,
             duration: 0,
-            alpha: 0.1,
+            alpha: 0.3,
             ease: easing,
           },
           {
@@ -29,7 +29,7 @@ export default class TweenHelper {
           {
             targets: element,
             duration: flashDuration,
-            alpha: 0.1,
+            alpha: 0.3,
             ease: easing,
             onComplete: () => {
               if (repeat === true)
