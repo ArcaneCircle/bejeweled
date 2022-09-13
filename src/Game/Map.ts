@@ -47,7 +47,7 @@ export default class Map {
     const newFakeMap: Piece[][] = []
     const fakeMap = [ // No match
       ['g', 'y', 'b', 'r', 'y', 'w', 'b', 'p'],
-      ['r', 'w', 'y', 'y', 'g', 'y', 'w', 'w'],
+      ['w', 'w', 'y', 'y', 'g', 'y', 'w', 'w'],
       ['w', 'g', 'r', 'y', 'g', 'w', 'p', 'p'],
       ['r', 'w', 'b', 'w', 'r', 'w', 'r', 'b'],
       ['w', 'w', 'y', 'r', 'w', 'b', 'w', 'b'],
@@ -204,6 +204,7 @@ export default class Map {
     let arrOfPiecesToMatch: Piece[] = [piece] // First Piece
     let direction: 'horizontal' | 'vertical' = 'horizontal'
     let matchArrOfPieces: Piece[] = []
+
     // check every direction
     for (let i = 0; i < 4; i++) {
       // set coordinates
@@ -222,6 +223,7 @@ export default class Map {
       if (isNumberInsideBoard(i >= 2 ? tileY : tileX)) {
         // select new piece
         const pieceSelected = map[tileX][tileY]
+
         if (pieceSelected && pieceSelected.pieceTypeByLetter === pieceTypeByLetter) {
           arrOfPiecesToMatch.push(pieceSelected) // Second Piece
 
@@ -230,6 +232,7 @@ export default class Map {
             // add the new matches
             matchArrOfPieces = matchArrOfPieces.concat(obj.matchArrOfPieces)
             // search for ortogonal matches
+
             for (let i = 0; i < obj.matchArrOfPieces.length; i++) {
               const ortogonalMatches = this.checkOrtogonalPieces(map, obj.matchArrOfPieces[i], direction)
               matchArrOfPieces.push(...ortogonalMatches)
