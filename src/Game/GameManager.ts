@@ -122,7 +122,8 @@ export default class GameManager {
     gameScene.tweens.add({
       targets: levelText,
       alpha: 0,
-      duration: 1500,
+      duration: duration * 1.5,
+      scale: 2,
       ease: 'Power2',
     })
   }
@@ -173,7 +174,7 @@ export default class GameManager {
   }
 
   comboUI(combo: number, x = 100, y = 100) {
-    this.insertModalText(`${combo}x combo`, { x, y }, 'combo', '#df8e73', 1500)
+    this.insertModalText(`${combo}x combo`, { x, y }, 'combo', '#df8e73', 3000)
   }
 
   private async updateLevelBar() {

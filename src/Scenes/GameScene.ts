@@ -47,28 +47,29 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.setBackgroundColor('#000')
-    levelBarImg = this.add.image(INITIAL_BOARD_SCREEN.WIDTH + 120, 1260, 'LevelBar').setDepth(1).setOrigin(0, 0)
+    levelBarImg = this.add.image(INITIAL_BOARD_SCREEN.WIDTH + 120, 1260 + 100, 'LevelBar').setDepth(1).setOrigin(0, 0)
     this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 70, 'backgroundBoard').setDepth(1).setOrigin(0.5, 0)
     this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 90, 'Border').setDepth(1).setOrigin(0.5, 0)
 
-    const newLocal = 'bold 53px Calibri'
+    const newLocal = 'bold 72px Calibri'
 
     // use rectangle instead of image
-    buttonResetRectangle = this.add.rectangle(this.cameras.main.centerX, 1370 + 220, 400, 80, 14101760, 0.8).setDepth(1).setOrigin(0.5, 0)
+    buttonResetRectangle = this.add.rectangle(this.cameras.main.centerX, 1370 + 140, 600, 120, 14101760, 0.8).setDepth(1).setOrigin(0.5, 0)
     buttonResetRectangle.setInteractive({ useHandCursor: true })
     buttonResetRectangle.on('pointerup', () => gameManager.reset())
 
-    buttonResetText = this.add.text(this.cameras.main.centerX, 1370 + 230, 'RESTART', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
+    buttonResetText = this.add.text(this.cameras.main.centerX, 1370 + 160, 'RESTART', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
 
-    buttonMenuRectangle = this.add.rectangle(this.cameras.main.centerX, 1370 + 320, 400, 80, 14101760, 0.8).setDepth(1).setOrigin(0.5, 0)
+    buttonMenuRectangle = this.add.rectangle(this.cameras.main.centerX, 1370 + 300, 600, 120, 14101760, 0.8).setDepth(1).setOrigin(0.5, 0)
     buttonMenuRectangle.setInteractive({ useHandCursor: true })
     buttonMenuRectangle.on('pointerup', () => this.scene.start('MenuScene'))
     // buttonMenuRectangle.on('pointerup', () => gameManager.gameOver())
 
-    buttonMenuText = this.add.text(this.cameras.main.centerX, 1370 + 330, 'HIGHSCORES', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
+    buttonMenuText = this.add.text(this.cameras.main.centerX, 1370 + 320, 'HIGHSCORES', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
 
-    scoreText = this.add.text(this.cameras.main.centerX, 1370 + 120, 'Score: 0', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
-    levelText = this.add.text(this.cameras.main.centerX, 1370 + 40, 'Level: 1', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
+    // level and score texts
+    levelText = this.add.text(100, 50, 'Level: 1', { font: newLocal, align: 'left', fixedWidth: 620 }).setDepth(1).setOrigin(0, 0)
+    scoreText = this.add.text(720, 50, 'Score: 0', { font: newLocal, align: 'right', fixedWidth: 620 }).setDepth(1).setOrigin(0, 0)
 
     new GameManager()
   }
