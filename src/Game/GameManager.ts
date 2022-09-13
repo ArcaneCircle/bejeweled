@@ -292,6 +292,12 @@ export default class GameManager {
     this.GOText && this.GOText.destroy()
     this.GOHeader && this.GOHeader.destroy()
 
+    // send score before reset
+    window.highscores.setScore(this.score)
+    // remove map and score from localStorage
+    window.localStorage.removeItem('dejeweled-map')
+    window.localStorage.removeItem('dejeweled-score')
+
     this.GOMenu = gameScene.add.rectangle(INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH / 2 - 20, 500, 1230, 450, 14101760, 0.8).setDepth(1).setOrigin(0, 0)
 
     const XMiddle = this.GOMenu.x + this.GOMenu.width / 2
