@@ -204,10 +204,13 @@ export default class Map {
     let arrOfPiecesToMatch: Piece[] = [piece] // First Piece
     let direction: 'horizontal' | 'vertical' = 'horizontal'
     let matchArrOfPieces: Piece[] = []
+    // check every direction
     for (let i = 0; i < 4; i++) {
+      // set coordinates
       let tileX = piece.currentTile.tileX + arr[i]
       let { tileY } = piece.currentTile
       if (i >= 2) {
+        // change direction and coordinates
         if (i === 2)
           arrOfPiecesToMatch = [piece]
         direction = 'vertical'
@@ -215,14 +218,23 @@ export default class Map {
         tileY = piece.currentTile.tileY + arr[i] as TileNumbers
       }
 
-      // FIXME: check need of checkOrtogonalPieces when it's already included in checkAdjacentForMatch
+      // FIXME: checkAdjacentForMatch
       if (isNumberInsideBoard(i >= 2 ? tileY : tileX)) {
+        // select new piece
         const pieceSelected = map[tileX][tileY]
         if (pieceSelected && pieceSelected.pieceTypeByLetter === pieceTypeByLetter) {
           arrOfPiecesToMatch.push(pieceSelected) // Second Piece
+
           const obj = this.checkAdjacentForMatch(map, pieceSelected, piece, arrOfPiecesToMatch, arr[i], direction) // Third and more Pieces
-          if (obj.matchArrOfPieces.length >= 3)
+          if (obj.matchArrOfPieces.length >= 3) {
+            // add the new matches
             matchArrOfPieces = matchArrOfPieces.concat(obj.matchArrOfPieces)
+            // search for ortogonal matches
+            for (let i = 0; i < obj.matchArrOfPieces.length; i++) {
+              const ortogonalMatches = this.checkOrtogonalPieces(map, obj.matchArrOfPieces[i], direction)
+              matchArrOfPieces.push(...ortogonalMatches)
+            }
+          }
         }
       }
     }
@@ -231,19 +243,6 @@ export default class Map {
 
     return { matchArrOfPieces }
   }
-
-  // public checkMatchV2(map: Piece[][], piece: Piece): { matchArrOfPieces: Piece[] } {
-  //   let matchArrOfPieces: Piece[] = []
-
-  //   const horizontalMatches = this.checkOrtogonalPieces(map, piece, 'horizontal')
-  //   const verticalMatches = this.checkOrtogonalPieces(map, piece, 'vertical')
-
-  //   matchArrOfPieces = horizontalMatches.concat(verticalMatches)
-
-  //   matchArrOfPieces = removeDuplicates(matchArrOfPieces)
-
-  //   return { matchArrOfPieces }
-  // }
 
   private checkOrtogonalPieces(map: Piece[][], piece: Piece, direction: 'horizontal' | 'vertical') {
     const additionalMatches = [] as Piece[]
@@ -311,24 +310,38 @@ export default class Map {
     return additionalMatches
   }
 
-  // FIXME: working for T-shaped but no for L-shaped
-  private checkAdjacentForMatch(map, pieceSelected, piece, arrOfPiecesToMatch, currentValueSide, direction: 'horizontal' | 'vertical'): { matchArrOfPieces: Piece[]; finalMap: Piece[][] } {
+  // FIXME: not working for T-shaped nor L-shaped
+  private checkAdjacentForMatch(
+    map: Piece[][],
+    pieceSelected: Piece,
+    piece: Piece,
+    arrOfPiecesToMatch: Piece[],
+    currentValueSide: number,
+    direction: 'horizontal' | 'vertical',
+  ): { matchArrOfPieces: Piece[]; finalMap: Piece[][] } {
     const { pieceTypeByLetter } = piece
     let nextMatch = currentValueSide < 0 ? -1 : 1
-    let tileX = direction === 'horizontal' ? piece.currentTile.tileX + (currentValueSide + nextMatch) : piece.currentTile.tileX
-    let tileY = direction === 'horizontal' ? piece.currentTile.tileY : piece.currentTile.tileY + (currentValueSide + nextMatch)
-    // let nextPosition = piece.currentTile.tileX + (currentValueSide + nextMatch);
-    if (isNumberInsideBoard(direction === 'horizontal' ? tileX : tileY)) {
+    let tileX = direction === 'horizontal'
+      ? piece.currentTile.tileX + (nextMatch * 2)
+      : piece.currentTile.tileX
+    let tileY = direction === 'horizontal'
+      ? piece.currentTile.tileY
+      : piece.currentTile.tileY + (nextMatch * 2)
+
+    if (isNumberInsideBoard(tileX) && isNumberInsideBoard(tileY)) {
       pieceSelected = map[tileX][tileY]
       while (pieceSelected && pieceSelected.pieceTypeByLetter === pieceTypeByLetter) {
         // check ortogonals here for every case
-        const otherMatches = this.checkOrtogonalPieces(map, pieceSelected, direction)
+        // const otherMatches = this.checkOrtogonalPieces(map, pieceSelected, direction)
 
         nextMatch += currentValueSide < 0 ? -1 : 1
-        arrOfPiecesToMatch.push(pieceSelected, ...otherMatches)
+        arrOfPiecesToMatch.push(
+          pieceSelected,
+          // ...otherMatches,
+        )
         tileX = direction === 'horizontal' ? piece.currentTile.tileX + (currentValueSide + nextMatch) : piece.currentTile.tileX
         tileY = direction === 'horizontal' ? piece.currentTile.tileY : piece.currentTile.tileY + (currentValueSide + nextMatch)
-        if (!isNumberInsideBoard(direction === 'horizontal' ? tileX : tileY))
+        if (!isNumberInsideBoard(tileX) || !isNumberInsideBoard(tileY))
           break
 
         // console.log(direction)
