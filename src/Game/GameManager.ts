@@ -221,12 +221,6 @@ export default class GameManager {
       // initialize combo counter
       let combo = 0
       const { matchArrOfPieces } = map.checkMatch(map.getCurrentMap(), this.lastPiece)
-      // if (finalMap && finalMap.length > 0) {
-      //   // console.log(finalMap, '\n mapa final [pieceMovement method]')
-      //   map.setCurrentMap(finalMap)
-      //   const typesArr = getPieceTypeList(finalMap)
-      //   typesArr && window.localStorage.setItem('dejeweled-map', JSON.stringify(typesArr))
-      // }
 
       if (matchArrOfPieces.length >= 3) {
         map.setCurrentMap(map.getCurrentMap())
@@ -241,12 +235,6 @@ export default class GameManager {
       }
 
       const { matchArrOfPieces: opositeArr } = map.checkMatch(map.getCurrentMap(), pieceToSwitch)
-      // const { matchArrOfPieces: opositeArr, finalMap: opositeMap } = map.checkMatch(map.getCurrentMap(), pieceToSwitch)
-      // if (opositeMap && opositeMap.length > 0) {
-      //   map.setCurrentMap(opositeMap)
-      //   const typesArr = getPieceTypeList(opositeMap)
-      //   typesArr && window.localStorage.setItem('dejeweled-map', JSON.stringify(typesArr))
-      // }
 
       if (opositeArr.length >= 3) {
         map.setCurrentMap(map.getCurrentMap())
