@@ -234,7 +234,7 @@ export default class GameManager {
         combo++
         console.log(`${combo}x combo`)
         if (combo > 1) {
-          this.comboUI(combo, 720, 1490)
+          this.comboUI(combo, 720, 720)
           this.score += combo * 100
           await this.updateLevelBar()
         }
@@ -254,7 +254,7 @@ export default class GameManager {
         combo++
         console.log(`${combo}x combo`)
         if (combo > 1) {
-          this.comboUI(combo, 720, 1490)
+          this.comboUI(combo, 720, 720)
           this.score += combo * 100
           await this.updateLevelBar()
         }
@@ -274,7 +274,7 @@ export default class GameManager {
           await this.matchAgain(resultForGameOver.piece)
           combo++
           console.log(`${combo}x combo`)
-          this.comboUI(combo, 720, 1490)
+          this.comboUI(combo, 720, 720)
           this.score += combo * 100
           await this.updateLevelBar()
           // await timeout(1000)
