@@ -46,14 +46,32 @@ export default class Map {
   createFakeMap() {
     const newFakeMap: Piece[][] = []
     const fakeMap = [ // No match
-      ['g', 'y', 'b', 'g', 'y', 'w', 'b', 'p'],
-      ['w', 'w', 'y', 'y', 'g', 'y', 'w', 'w'],
+      ['g', 'y', 'b', 'r', 'y', 'w', 'b', 'p'],
+      ['r', 'w', 'y', 'y', 'g', 'y', 'w', 'w'],
       ['w', 'g', 'r', 'y', 'g', 'w', 'p', 'p'],
       ['r', 'w', 'b', 'w', 'r', 'w', 'r', 'b'],
       ['w', 'w', 'y', 'r', 'w', 'b', 'w', 'b'],
       ['w', 'y', 'b', 'y', 'w', 'p', 'g', 'r'],
       ['p', 'w', 'y', 'p', 'g', 'p', 'g', 'y'],
       ['w', 'b', 'b', 'w', 'y', 'w', 'p', 'y'],
+      // testing T-shaped
+      // ['g', 'y', 'b', 'g', 'y', 'p', 'b', 'p'],
+      // ['w', 'w', 'y', 'y', 'g', 'y', 'w', 'w'],
+      // ['w', 'g', 'r', 'y', 'g', 'w', 'p', 'p'],
+      // ['r', 'w', 'b', 'w', 'r', 'w', 'r', 'b'],
+      // ['w', 'w', 'y', 'r', 'w', 'b', 'w', 'b'],
+      // ['w', 'y', 'b', 'y', 'w', 'p', 'g', 'r'],
+      // ['p', 'w', 'y', 'p', 'g', 'p', 'g', 'y'],
+      // ['w', 'b', 'b', 'w', 'y', 'w', 'p', 'y'],
+      // testing +-shaped
+      // ['g', 'y', 'b', 'g', 'y', 'w', 'b', 'p'],
+      // ['w', 'w', 'y', 'y', 'g', 'y', 'w', 'w'],
+      // ['w', 'g', 'r', 'y', 'g', 'w', 'p', 'p'],
+      // ['r', 'w', 'b', 'w', 'r', 'w', 'r', 'b'],
+      // ['w', 'w', 'y', 'r', 'w', 'b', 'w', 'b'],
+      // ['w', 'y', 'b', 'y', 'w', 'p', 'g', 'r'],
+      // ['p', 'w', 'y', 'p', 'g', 'p', 'g', 'y'],
+      // ['w', 'b', 'b', 'w', 'y', 'w', 'p', 'y'],
     ]
 
     fakeMap.forEach((line, i) => line.forEach((piece, j) => {
@@ -229,31 +247,71 @@ export default class Map {
 
   private checkOrtogonalPieces(map: Piece[][], piece: Piece, direction: 'horizontal' | 'vertical') {
     const additionalMatches = [] as Piece[]
-    const side1X = direction === 'horizontal' ? piece.currentTile.tileX : piece.currentTile.tileX - 1 as TileNumbers
-    const side2X = direction === 'horizontal' ? piece.currentTile.tileX : piece.currentTile.tileX + 1 as TileNumbers
-    const side1Y = direction === 'horizontal' ? piece.currentTile.tileY - 1 as TileNumbers : piece.currentTile.tileY
-    const side2Y = direction === 'horizontal' ? piece.currentTile.tileY + 1 as TileNumbers : piece.currentTile.tileY
+    const side1X = direction === 'horizontal'
+      ? piece.currentTile.tileX
+      : piece.currentTile.tileX - 1 as TileNumbers
+    const side2X = direction === 'horizontal'
+      ? piece.currentTile.tileX
+      : piece.currentTile.tileX + 1 as TileNumbers
+    const side1Y = direction === 'horizontal'
+      ? piece.currentTile.tileY - 1 as TileNumbers
+      : piece.currentTile.tileY
+    const side2Y = direction === 'horizontal'
+      ? piece.currentTile.tileY + 1 as TileNumbers
+      : piece.currentTile.tileY
 
-    if (isNumberInsideBoard(side1X) && isNumberInsideBoard(side1Y) && isNumberInsideBoard(side2X) && isNumberInsideBoard(side2Y) && map[side1X][side1Y].pieceTypeByLetter === piece.pieceTypeByLetter && piece.pieceTypeByLetter === map[side2X][side2Y].pieceTypeByLetter) {
+    if (isNumberInsideBoard(side1X)
+      && isNumberInsideBoard(side1Y)
+      && isNumberInsideBoard(side2X)
+      && isNumberInsideBoard(side2Y)
+      && map[side1X][side1Y].pieceTypeByLetter === piece.pieceTypeByLetter
+      && piece.pieceTypeByLetter === map[side2X][side2Y].pieceTypeByLetter) {
       // son del mismo tipo y están en el tablero
       additionalMatches.push(map[side1X][side1Y], piece, map[side2X][side2Y])
-
-      // check for extended matches
-      let extendedIndex1 = direction === 'horizontal' ? side1Y - 1 : side1X - 1
-      while (isNumberInsideBoard(extendedIndex1) && map[direction === 'horizontal' ? side1X : extendedIndex1][direction === 'horizontal' ? extendedIndex1 : side1Y].pieceTypeByLetter === piece.pieceTypeByLetter) {
-        additionalMatches.push(map[direction === 'horizontal' ? side1X : extendedIndex1][direction === 'horizontal' ? extendedIndex1 : side1Y])
-        extendedIndex1--
-      }
-      let extendedIndex2 = direction === 'horizontal' ? side1Y + 1 : side1X + 1
-      while (isNumberInsideBoard(extendedIndex2) && map[direction === 'horizontal' ? side1X : extendedIndex2][direction === 'horizontal' ? extendedIndex2 : side1Y].pieceTypeByLetter === piece.pieceTypeByLetter) {
-        additionalMatches.push(map[direction === 'horizontal' ? side1X : extendedIndex2][direction === 'horizontal' ? extendedIndex2 : side1Y])
-        extendedIndex2++
-      }
-      // console.log(direction, additionalMatches.map(m => m.currentTile))
     }
+
+    if (isNumberInsideBoard(side1X)
+      && isNumberInsideBoard(side1Y)
+      && map[side1X][side1Y].pieceTypeByLetter === piece.pieceTypeByLetter) {
+      // possible match to this side
+      const yetAnotherMatches = this.checkExtended(side1X, side1Y, map, piece, direction)
+      additionalMatches.push(...yetAnotherMatches)
+    }
+    else if (isNumberInsideBoard(side2X)
+      && isNumberInsideBoard(side2Y)
+      && map[side2X][side2Y].pieceTypeByLetter === piece.pieceTypeByLetter) {
+      // possible match to this other side
+      const yetAnotherMatches = this.checkExtended(side1X, side1Y, map, piece, direction)
+      additionalMatches.push(...yetAnotherMatches)
+    }
+    return removeDuplicates(additionalMatches)
+  }
+
+  private checkExtended(x: TileNumbers, y: TileNumbers, map: Piece[][], piece: Piece, direction: 'horizontal' | 'vertical') {
+    const directionArr = [1, -1]
+    let additionalMatches = [] as Piece[]
+    let tempMatches = [] as Piece[]
+    for (let i = 0; i < 2; i++) {
+      let extendedIndex = direction === 'horizontal' ? y + directionArr[i] : x + directionArr[i]
+      while (
+        isNumberInsideBoard(extendedIndex)
+        && map[direction === 'horizontal' ? x : extendedIndex][direction === 'horizontal' ? extendedIndex : y].pieceTypeByLetter === piece.pieceTypeByLetter
+        && map?.[x]?.[y]
+        && map[x][y].pieceTypeByLetter === piece.pieceTypeByLetter
+      ) {
+        tempMatches.push(map[direction === 'horizontal' ? x : extendedIndex][direction === 'horizontal' ? extendedIndex : y], piece, map[x][y])
+
+        console.log('checkExtended\n', extendedIndex, removeDuplicates(tempMatches).map(piece => piece.currentTile))
+        i === 0 ? extendedIndex++ : extendedIndex--
+      }
+    }
+    tempMatches = removeDuplicates(tempMatches)
+    if (tempMatches.length > 2)
+      additionalMatches = tempMatches
     return additionalMatches
   }
 
+  // FIXME: working for T-shaped but no for L-shaped
   private checkAdjacentForMatch(map, pieceSelected, piece, arrOfPiecesToMatch, currentValueSide, direction: 'horizontal' | 'vertical'): { matchArrOfPieces: Piece[]; finalMap: Piece[][] } {
     const { pieceTypeByLetter } = piece
     let nextMatch = currentValueSide < 0 ? -1 : 1
