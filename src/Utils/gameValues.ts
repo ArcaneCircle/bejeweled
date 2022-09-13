@@ -27,5 +27,5 @@ export const HALF_SCREEN = {
 
 export const INITIAL_BOARD_SCREEN = {
   WIDTH: 200,
-  HEIGHT: 120,
+  HEIGHT: 220,
 }

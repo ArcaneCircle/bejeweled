@@ -47,7 +47,7 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.setBackgroundColor('#000')
-    levelBarImg = this.add.image(INITIAL_BOARD_SCREEN.WIDTH + 120, 1260, 'LevelBar').setDepth(1).setOrigin(0, 0)
+    levelBarImg = this.add.image(INITIAL_BOARD_SCREEN.WIDTH + 120, 1260 + 100, 'LevelBar').setDepth(1).setOrigin(0, 0)
     this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 70, 'backgroundBoard').setDepth(1).setOrigin(0.5, 0)
     this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 90, 'Border').setDepth(1).setOrigin(0.5, 0)
 
@@ -67,7 +67,9 @@ export default class GameScene extends Phaser.Scene {
 
     buttonMenuText = this.add.text(this.cameras.main.centerX, 1370 + 330, 'HIGHSCORES', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
 
-    scoreText = this.add.text(this.cameras.main.centerX, 1370 + 120, 'Score: 0', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
+    // move text up
+    scoreText = this.add.text(this.cameras.main.centerX, 50, 'Score: 0', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
+    // scoreText = this.add.text(this.cameras.main.centerX, 1370 + 120, 'Score: 0', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
     levelText = this.add.text(this.cameras.main.centerX, 1370 + 40, 'Level: 1', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
 
     new GameManager()
