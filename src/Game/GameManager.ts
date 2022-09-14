@@ -130,7 +130,7 @@ export default class GameManager {
   private async scoreIt(scoreToType: string, pieces: Piece[]) {
     const hardCoef = scoreToType === 'other' ? 2 : 1
     const piecesAmount = pieces.length
-    const toScore = piecesAmount < 4 ? 50 : hardCoef * ((piecesAmount - 3) * Math.pow(10, piecesAmount - 2))
+    const toScore = piecesAmount < 4 ? 50 : hardCoef * (50 * Math.pow(2, piecesAmount - 3))
     console.log('Score: +', toScore, '\npieces: ', piecesAmount)
     this.calculateScoreUI(pieces, toScore)
     this.score += toScore
@@ -149,7 +149,7 @@ export default class GameManager {
     const tileX = average(arrayXValues) as TileNumbers
     const tileY = average(arrayYValues) as TileNumbers
     const color = getPieceHashColor(pieces[0]) ?? undefined
-    this.insertModalText(`+${score}`, convertTileToPosition({ tileX, tileY }), 'score', color)
+    this.insertModalText(`+${score}`, convertTileToPosition({ tileX, tileY }), 'score', color, 2000)
   }
 
   comboUI(combo: number, x = 100, y = 100) {
