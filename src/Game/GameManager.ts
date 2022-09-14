@@ -4,7 +4,7 @@
 /* eslint-disable linebreak-style */
 import { average, convertTileToPosition, getPieceHashColor, getPieceTypeList, getRandomValueFromArray, isNumberInsideBoard, makeMovementAnimation, makeScaleAnimation, recognizeScoreType, rndNumber, timeout } from '../Utils/utils'
 import { gameScene, levelBarImg, levelText, scoreText } from '../Scenes/GameScene'
-import type { PositionInPixel, PositionInTile, ScoreTypes, TileNumbers } from '../game.interfaces'
+import type { PositionInPixel, PositionInTile, TileNumbers } from '../game.interfaces'
 import { INITIAL_BOARD_SCREEN, LEVEL_SCORE_TO_ADD, PIECE_TYPES, TILE } from '../Utils/gameValues'
 import Map, { map } from './Map'
 import Piece from './Piece'
@@ -122,31 +122,16 @@ export default class GameManager {
     })
   }
 
-  private async scoreIt(scoreToType: ScoreTypes, pieces: Piece[]) {
-    let toScore = 2000
-    switch (scoreToType) {
-      case '3line':
-        toScore = 50
-        break
-      case '4line':
-        toScore = 100
-        break
-      case '5line':
-        toScore = 500
-        break
-      case '6line':
-        toScore = 800
-        break
-      case '3L':
-        toScore = 800
-        break
-      case '4L':
-        toScore = 1000
-        break
-      default:
-        console.log('No scoreType was found')
-    }
-
+  /**
+   * Animate the score. Update score and progress level bar
+   * @param {string} scoreToType - kind of score
+   * @param {Piece[]} pieces - matched pieces
+   */
+  private async scoreIt(scoreToType: string, pieces: Piece[]) {
+    const hardCoef = scoreToType === 'other' ? 2 : 1
+    const piecesAmount = pieces.length
+    const toScore = piecesAmount < 4 ? 50 : hardCoef * ((piecesAmount - 3) * Math.pow(10, piecesAmount - 2))
+    console.log('Score: +', toScore, '\npieces: ', piecesAmount)
     this.calculateScoreUI(pieces, toScore)
     this.score += toScore
     await this.updateLevelBar()
