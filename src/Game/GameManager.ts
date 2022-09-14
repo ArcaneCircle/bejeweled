@@ -208,7 +208,7 @@ export default class GameManager {
         console.log(`${combo}x combo`)
         if (combo > 1) {
           this.comboUI(combo, 720, 720)
-          this.score += combo * 100
+          this.score += combo * 50
           await this.updateLevelBar()
         }
       }
