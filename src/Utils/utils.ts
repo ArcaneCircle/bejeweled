@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import type { PositionInPixel, PositionInTile, ScoreTypes, TileNumbers } from '../game.interfaces'
+import type { PositionInPixel, PositionInTile, TileNumbers } from '../game.interfaces'
 import { PIECE_TYPES } from '../game.interfaces'
 import type Piece from '../Game/Piece'
 import { gameScene } from '../Scenes/GameScene'
@@ -134,8 +134,12 @@ export const timeout = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 export const average = arr => arr.reduce((a, b) => a + b, 0) / arr.length
 
-export const recognizeScoreType = (pieces: Piece[]): ScoreTypes => {
-  let scoreType
+/**
+ * Given an array of pieces, it returns what kind of score was achieved
+ * @param {Piece[]} pieces matched pieces
+ * @returns type of score in the form "line" or "other"
+ */
+export const recognizeScoreType = (pieces: Piece[]): string => {
   let xCounter = 1
   let yCounter = 1
   let currentX = pieces[0].currentTile.tileX
@@ -151,13 +155,12 @@ export const recognizeScoreType = (pieces: Piece[]): ScoreTypes => {
     }
   })
 
-  if (xCounter !== 1 && yCounter !== 1) {
-    const biggestCounter = xCounter > yCounter ? xCounter : yCounter
-    scoreType = `${biggestCounter}L` as ScoreTypes
-  }
-  else {
-    scoreType = `${xCounter === 1 ? yCounter : xCounter}line` as ScoreTypes
-  }
+  let scoreType = ''
+  if (xCounter !== 1 && yCounter !== 1)
+    scoreType = 'other'
+  else
+    scoreType = 'line'
+
   console.log('Scoretype: ', scoreType)
   return scoreType
 }
