@@ -60,17 +60,11 @@ export default class GameManager {
     window.localStorage.removeItem('dejeweled-score')
     map.resetMap()
     this.resetScoreAndLevel()
-    // this.gameOver()
-    if (this.GOMenu)
-      this.GOMenu.destroy()
-    if (this.GOBtnRectangle)
-      this.GOBtnRectangle.destroy()
-    if (this.GOBtnText)
-      this.GOBtnText.destroy()
-    if (this.GOText)
-      this.GOText.destroy()
-    if (this.GOHeader)
-      this.GOHeader.destroy()
+    this.GOBtnRectangle && this.GOBtnRectangle.destroy()
+    this.GOBtnText && this.GOBtnText.destroy()
+    this.GOMenu && this.GOMenu.destroy()
+    this.GOText && this.GOText.destroy()
+    this.GOHeader && this.GOHeader.destroy()
   }
 
   public changeCurrentSelectedPiece(newPiece: Piece): Piece {
