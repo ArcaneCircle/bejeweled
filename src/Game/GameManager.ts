@@ -399,7 +399,7 @@ export default class GameManager {
 
       const resultForFutureMoves = map.isExistantFutureMoves(map.getCurrentMap())
       if (!resultForGameOver.isMatch && !resultForFutureMoves)
-        this.gameOver()
+        this.reset()
 
       if (resultForGameOver.isMatch) {
         do {
@@ -408,7 +408,7 @@ export default class GameManager {
         } while (resultForGameOver.isMatch)
 
         if (!map.isExistantFutureMoves(map.getCurrentMap()))
-          this.gameOver()
+          this.reset()
       }
     }
   }
