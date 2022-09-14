@@ -153,7 +153,7 @@ export default class GameManager {
   }
 
   comboUI(combo: number, x = 100, y = 100) {
-    this.insertModalText(`${combo}x combo`, { x, y }, 'combo', '#df8e73', 3000)
+    this.insertModalText(`${combo}x combo (+${combo * 50})`, { x, y }, 'combo', '#df8e73', 2500)
   }
 
   private async updateLevelBar() {
