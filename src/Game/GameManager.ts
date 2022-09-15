@@ -43,6 +43,7 @@ export default class GameManager {
 
   public resetScoreAndLevel() {
     this.score = parseInt(window.localStorage.getItem('dejeweled-score') ?? '0')
+    console.log('Score: %s', this.score)
     this.level = Math.floor(this.score / LEVEL_SCORE_TO_ADD) + 1
     this.scoreObjective = this.level * LEVEL_SCORE_TO_ADD + (this.level > 1 ? this.level * 100 : 0)
     this.previousScoreObjective = this.scoreObjective - (LEVEL_SCORE_TO_ADD) - (this.level > 1 ? this.level * 100 : 0)
@@ -134,6 +135,7 @@ export default class GameManager {
     console.log('Score: +', toScore, '\npieces: ', piecesAmount)
     this.calculateScoreUI(pieces, toScore)
     this.score += toScore
+    console.log('Score: %s', this.score)
     await this.updateLevelBar()
 
     scoreText.setText(`Score: ${this.score}`)
@@ -209,6 +211,7 @@ export default class GameManager {
         if (combo > 1) {
           this.comboUI(combo, 720, 720)
           this.score += combo * 50
+          console.log('Score: %s', this.score)
           await this.updateLevelBar()
         }
       }
@@ -222,7 +225,8 @@ export default class GameManager {
         console.log(`${combo}x combo`)
         if (combo > 1) {
           this.comboUI(combo, 720, 720)
-          this.score += combo * 100
+          this.score += combo * 50
+          console.log('Score: %s', this.score)
           await this.updateLevelBar()
         }
       }
@@ -242,7 +246,8 @@ export default class GameManager {
           combo++
           console.log(`${combo}x combo`)
           this.comboUI(combo, 720, 720)
-          this.score += combo * 100
+          this.score += combo * 50
+          console.log('Score: %s', this.score)
           await this.updateLevelBar()
           // await timeout(1000)
           resultForGameOver = map.isBoardMatch(map.getCurrentMap())
