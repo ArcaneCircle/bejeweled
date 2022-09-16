@@ -155,7 +155,7 @@ export default class GameManager {
   }
 
   comboUI(combo: number, x = 100, y = 100) {
-    this.insertModalText(`${combo}x combo (+${combo * 50})`, { x, y }, 'combo', '#df8e73', 2500)
+    this.insertModalText(`${combo}x combo (+${combo * 20})`, { x, y }, 'combo', '#df8e73', 2500)
   }
 
   private async updateLevelBar() {
@@ -210,7 +210,7 @@ export default class GameManager {
         console.log(`${combo}x combo`)
         if (combo > 1) {
           this.comboUI(combo, 720, 720)
-          this.score += combo * 50
+          this.score += combo * 20
           console.log('Score: %s', this.score)
           await this.updateLevelBar()
         }
@@ -225,7 +225,7 @@ export default class GameManager {
         console.log(`${combo}x combo`)
         if (combo > 1) {
           this.comboUI(combo, 720, 720)
-          this.score += combo * 50
+          this.score += combo * 20
           console.log('Score: %s', this.score)
           await this.updateLevelBar()
         }
@@ -246,7 +246,7 @@ export default class GameManager {
           combo++
           console.log(`${combo}x combo`)
           this.comboUI(combo, 720, 720)
-          this.score += combo * 50
+          this.score += combo * 20
           console.log('Score: %s', this.score)
           await this.updateLevelBar()
           // await timeout(1000)
