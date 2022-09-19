@@ -204,7 +204,7 @@ export default class GameManager {
       const { matchArrOfPieces } = map.checkMatch(map.getCurrentMap(), this.lastPiece)
 
       if (matchArrOfPieces.length >= 3) {
-        map.setCurrentMap(map.getCurrentMap())
+        // map.setCurrentMap(map.getCurrentMap())
         await this.matchIt(matchArrOfPieces)
         combo++
         console.log(`${combo}x combo`)
@@ -219,7 +219,7 @@ export default class GameManager {
       const { matchArrOfPieces: opositeArr } = map.checkMatch(map.getCurrentMap(), pieceToSwitch)
 
       if (opositeArr.length >= 3) {
-        map.setCurrentMap(map.getCurrentMap())
+        // map.setCurrentMap(map.getCurrentMap())
         await this.matchIt(opositeArr)
         combo++
         console.log(`${combo}x combo`)
@@ -265,7 +265,7 @@ export default class GameManager {
 
   private async matchAgain(piece: Piece) {
     const { matchArrOfPieces } = map.checkMatch(map.getCurrentMap(), piece)
-    map.setCurrentMap(map.getCurrentMap())
+    // map.setCurrentMap(map.getCurrentMap())
     await this.matchIt(matchArrOfPieces)
   }
 
