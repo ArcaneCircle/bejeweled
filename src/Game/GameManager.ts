@@ -212,7 +212,7 @@ export default class GameManager {
           this.comboUI(combo, 720, 720)
           this.score += combo * 20
           console.log('Score: %s', this.score)
-          await this.updateLevelBar()
+          this.updateLevelBar()
         }
       }
 
@@ -227,7 +227,7 @@ export default class GameManager {
           this.comboUI(combo, 720, 720)
           this.score += combo * 20
           console.log('Score: %s', this.score)
-          await this.updateLevelBar()
+          this.updateLevelBar()
         }
       }
 
@@ -248,7 +248,7 @@ export default class GameManager {
           this.comboUI(combo, 720, 720)
           this.score += combo * 20
           console.log('Score: %s', this.score)
-          await this.updateLevelBar()
+          this.updateLevelBar()
           // await timeout(1000)
           resultForGameOver = map.isBoardMatch(map.getCurrentMap())
         } while (resultForGameOver.isMatch)
