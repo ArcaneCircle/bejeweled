@@ -314,7 +314,7 @@ export default class GameManager {
     this.scoreAndLevelUp(pieces)
     this.fallPieces(pieces)
     this.generateMore()
-    await timeout(500)
+    await timeout(300)
     return null
   }
 
