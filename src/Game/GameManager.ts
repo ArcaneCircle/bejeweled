@@ -198,10 +198,17 @@ export default class GameManager {
     if (this.isPieceSelectedInFrame && map.isPieceAdjacent(pieceToSwitch)) {
       this.isMoving = true
       this.resetPiecesForAction()
+
       await pieceToSwitch.switch(this.lastPiece)
+
+      // find which piece is up in y-axis
+      let [piece1, piece2] = [this.lastPiece, pieceToSwitch]
+      if (piece1.currentTile.tileY > piece2.currentTile.tileY)
+        [piece1, piece2] = [piece2, piece1]
+
       // initialize combo counter
       let combo = 0
-      const { matchArrOfPieces } = map.checkMatch(map.getCurrentMap(), this.lastPiece)
+      const { matchArrOfPieces } = map.checkMatch(map.getCurrentMap(), piece1)
 
       if (matchArrOfPieces.length >= 3) {
         // map.setCurrentMap(map.getCurrentMap())
@@ -216,7 +223,7 @@ export default class GameManager {
         }
       }
 
-      const { matchArrOfPieces: opositeArr } = map.checkMatch(map.getCurrentMap(), pieceToSwitch)
+      const { matchArrOfPieces: opositeArr } = map.checkMatch(map.getCurrentMap(), piece2)
 
       if (opositeArr.length >= 3) {
         // map.setCurrentMap(map.getCurrentMap())
