@@ -16,11 +16,7 @@ export const config = {
   },
   physics: {
     default: 'arcade',
-    arcade: {
-      // debug: true,
-    },
   },
-  // scene: [GameScene, MenuScene]
   scene: [MenuScene, GameScene],
 }
 

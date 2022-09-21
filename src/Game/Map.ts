@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-this-alias */
 /* eslint-disable import/no-mutable-exports */
 import type { PositionInTile, TileNumbers } from '../game.interfaces'
@@ -6,7 +5,6 @@ import { INITIAL_BOARD_SCREEN, MAP, PIECE_TYPES, TILE } from '../Utils/gameValue
 import { convertTileToPosition, getRandomValueFromArray, isNumberInsideBoard, removeDuplicates } from '../Utils/utils'
 import { gameManager } from './GameManager'
 import Piece from './Piece'
-// import * as gv from '../Utils/gameValues';
 // eslint-disable-next-line import/prefer-default-export
 export let map: Map
 
@@ -54,24 +52,6 @@ export default class Map {
       ['w', 'y', 'b', 'y', 'w', 'p', 'g', 'r'],
       ['p', 'w', 'y', 'p', 'g', 'p', 'g', 'y'],
       ['w', 'b', 'b', 'w', 'y', 'w', 'p', 'y'],
-      // testing T-shaped
-      // ['g', 'y', 'b', 'g', 'y', 'p', 'b', 'p'],
-      // ['w', 'w', 'y', 'y', 'g', 'y', 'w', 'w'],
-      // ['w', 'g', 'r', 'y', 'g', 'w', 'p', 'p'],
-      // ['r', 'w', 'b', 'w', 'r', 'w', 'r', 'b'],
-      // ['w', 'w', 'y', 'r', 'w', 'b', 'w', 'b'],
-      // ['w', 'y', 'b', 'y', 'w', 'p', 'g', 'r'],
-      // ['p', 'w', 'y', 'p', 'g', 'p', 'g', 'y'],
-      // ['w', 'b', 'b', 'w', 'y', 'w', 'p', 'y'],
-      // testing +-shaped
-      // ['g', 'y', 'b', 'g', 'y', 'w', 'b', 'p'],
-      // ['w', 'w', 'y', 'y', 'g', 'y', 'w', 'w'],
-      // ['w', 'g', 'r', 'y', 'g', 'w', 'p', 'p'],
-      // ['r', 'w', 'b', 'w', 'r', 'w', 'r', 'b'],
-      // ['w', 'w', 'y', 'r', 'w', 'b', 'w', 'b'],
-      // ['w', 'y', 'b', 'y', 'w', 'p', 'g', 'r'],
-      // ['p', 'w', 'y', 'p', 'g', 'p', 'g', 'y'],
-      // ['w', 'b', 'b', 'w', 'y', 'w', 'p', 'y'],
     ]
 
     fakeMap.forEach((line, i) => line.forEach((piece, j) => {
@@ -219,7 +199,6 @@ export default class Map {
         tileY = piece.currentTile.tileY + arr[i] as TileNumbers
       }
 
-      // FIXME: checkAdjacentForMatch
       if (isNumberInsideBoard(i >= 2 ? tileY : tileX)) {
         // select new piece
         const pieceSelected = map[tileX][tileY]
@@ -303,7 +282,6 @@ export default class Map {
       ) {
         tempMatches.push(map[direction === 'horizontal' ? x : extendedIndex][direction === 'horizontal' ? extendedIndex : y], piece, map[x][y])
 
-        console.log('checkExtended\n', extendedIndex, removeDuplicates(tempMatches).map(piece => piece.currentTile))
         i === 0 ? extendedIndex++ : extendedIndex--
       }
     }
@@ -313,7 +291,6 @@ export default class Map {
     return additionalMatches
   }
 
-  // FIXME: not working for T-shaped nor L-shaped
   private checkAdjacentForMatch(
     map: Piece[][],
     pieceSelected: Piece,
@@ -334,20 +311,13 @@ export default class Map {
     if (isNumberInsideBoard(tileX) && isNumberInsideBoard(tileY)) {
       pieceSelected = map[tileX][tileY]
       while (pieceSelected && pieceSelected.pieceTypeByLetter === pieceTypeByLetter) {
-        // check ortogonals here for every case
-        // const otherMatches = this.checkOrtogonalPieces(map, pieceSelected, direction)
-
         nextMatch += currentValueSide < 0 ? -1 : 1
-        arrOfPiecesToMatch.push(
-          pieceSelected,
-          // ...otherMatches,
-        )
+        arrOfPiecesToMatch.push(pieceSelected)
         tileX = direction === 'horizontal' ? piece.currentTile.tileX + (currentValueSide + nextMatch) : piece.currentTile.tileX
         tileY = direction === 'horizontal' ? piece.currentTile.tileY : piece.currentTile.tileY + (currentValueSide + nextMatch)
         if (!isNumberInsideBoard(tileX) || !isNumberInsideBoard(tileY))
           break
 
-        // console.log(direction)
         pieceSelected = map[tileX][tileY]
       }
     }

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import type { PositionInPixel, PositionInTile, TileNumbers } from '../game.interfaces'
 import { PIECE_TYPES } from '../game.interfaces'
 import type Piece from '../Game/Piece'
@@ -41,7 +40,6 @@ export function getPieceHashColor(piece: Piece): string | null {
     case 'p':
       return '#e101cd'
     default:
-      console.log('getPieceTypeEnum failed')
       return null
   }
 }
@@ -62,7 +60,6 @@ export function getPieceTypeEnum(type: string): PIECE_TYPES | null {
     case 'p':
       return PIECE_TYPES.PURPLE
     default:
-      console.log('getPieceTypeEnum failed')
       return null
   }
 }
@@ -83,7 +80,6 @@ export function getPieceTypeNumber(type: string): number | null {
     case 'p':
       return 6
     default:
-      console.log('getPieceTypeNumber failed')
       return null
   }
 }
@@ -161,7 +157,6 @@ export const recognizeScoreType = (pieces: Piece[]): string => {
   else
     scoreType = 'line'
 
-  console.log('Scoretype: ', scoreType)
   return scoreType
 }
 

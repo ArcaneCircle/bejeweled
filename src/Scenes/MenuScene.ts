@@ -7,8 +7,6 @@ import TweenHelper from '~/Utils/animate.js'
 import title from '/assets/Bejeweled_title.png'
 
 export default class MenuScene extends Phaser.Scene {
-  // private playerCarsGroup: Phaser.GameObjects.Group;
-
   constructor() {
     super('MenuScene')
   }
@@ -20,8 +18,6 @@ export default class MenuScene extends Phaser.Scene {
   create() {
     this.cameras.main.setBackgroundColor('#000')
     this.add.image(this.cameras.main.centerX, 150, 'logo').setDepth(1).setOrigin(0.5, 0).setScale(6)
-
-    // this.add.text(HALF_SCREEN.WIDTH, 150, 'BEJEWELED', { font: 'bold 250px monospace' }).setDepth(1).setOrigin(0.5, 0)
 
     // Add scoreboard
     const { posArr, nameArr, scoreArr } = getScoreboardArray()

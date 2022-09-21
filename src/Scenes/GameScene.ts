@@ -20,8 +20,6 @@ export let scoreText, levelText, buttonResetRectangle, buttonResetText, buttonMe
 export let levelBarImg: Phaser.GameObjects.Image
 
 export default class GameScene extends Phaser.Scene {
-  // private playerCarsGroup: Phaser.GameObjects.Group;
-
   constructor() {
     super('GameScene')
     gameScene = this
@@ -41,8 +39,6 @@ export default class GameScene extends Phaser.Scene {
       frameWidth: TILE.WIDTH,
       frameHeight: TILE.HEIGHT,
     })
-
-    // this.menuGameOver = this.add.group();
   }
 
   create() {
@@ -63,7 +59,6 @@ export default class GameScene extends Phaser.Scene {
     buttonMenuRectangle = this.add.rectangle(this.cameras.main.centerX, 1370 + 300, 600, 120, 14101760, 0.8).setDepth(1).setOrigin(0.5, 0)
     buttonMenuRectangle.setInteractive({ useHandCursor: true })
     buttonMenuRectangle.on('pointerup', () => this.scene.start('MenuScene'))
-    // buttonMenuRectangle.on('pointerup', () => gameManager.gameOver())
 
     buttonMenuText = this.add.text(this.cameras.main.centerX, 1370 + 320, 'HIGHSCORES', { font: newLocal }).setDepth(1).setOrigin(0.5, 0)
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-this-alias */
 /* eslint-disable import/no-mutable-exports */
 /* eslint-disable linebreak-style */
@@ -43,11 +42,9 @@ export default class GameManager {
 
   public resetScoreAndLevel() {
     this.score = parseInt(window.localStorage.getItem('dejeweled-score') ?? '0')
-    console.log('Score: %s', this.score)
     this.level = Math.floor(this.score / LEVEL_SCORE_TO_ADD) + 1
     this.scoreObjective = this.level * LEVEL_SCORE_TO_ADD + (this.level > 1 ? this.level * 100 : 0)
     this.previousScoreObjective = this.scoreObjective - (LEVEL_SCORE_TO_ADD) - (this.level > 1 ? this.level * 100 : 0)
-    // levelBarImg.scaleX = 0
     levelBarImg.scaleX = (this.score - this.previousScoreObjective) / (LEVEL_SCORE_TO_ADD + (this.level > 1 ? this.level * 100 : 0))
     scoreText.setText(`Score: ${this.score}`)
     levelText.setText(`Level: ${this.level}`)
@@ -132,10 +129,8 @@ export default class GameManager {
     const hardCoef = scoreToType === 'other' ? 2 : 1
     const piecesAmount = pieces.length
     const toScore = piecesAmount < 4 ? 50 : hardCoef * (50 * Math.pow(2, piecesAmount - 3))
-    console.log('Score: +', toScore, '\npieces: ', piecesAmount)
     this.calculateScoreUI(pieces, toScore)
     this.score += toScore
-    console.log('Score: %s', this.score)
     await this.updateLevelBar()
 
     scoreText.setText(`Score: ${this.score}`)
@@ -193,7 +188,6 @@ export default class GameManager {
     return null
   }
 
-  // TODO: work here
   public async piecesMovement(pieceToSwitch: Piece) {
     if (this.isPieceSelectedInFrame && map.isPieceAdjacent(pieceToSwitch)) {
       this.isMoving = true
@@ -214,11 +208,9 @@ export default class GameManager {
         // map.setCurrentMap(map.getCurrentMap())
         await this.matchIt(matchArrOfPieces)
         combo++
-        console.log(`${combo}x combo`)
         if (combo > 1) {
           this.comboUI(combo, 720, 720)
           this.score += combo * 20
-          console.log('Score: %s', this.score)
           this.updateLevelBar()
         }
       }
@@ -229,11 +221,9 @@ export default class GameManager {
         // map.setCurrentMap(map.getCurrentMap())
         await this.matchIt(opositeArr)
         combo++
-        console.log(`${combo}x combo`)
         if (combo > 1) {
           this.comboUI(combo, 720, 720)
           this.score += combo * 20
-          console.log('Score: %s', this.score)
           this.updateLevelBar()
         }
       }
@@ -251,10 +241,8 @@ export default class GameManager {
         do {
           await this.matchAgain(resultForGameOver.piece)
           combo++
-          console.log(`${combo}x combo`)
           this.comboUI(combo, 720, 720)
           this.score += combo * 20
-          console.log('Score: %s', this.score)
           this.updateLevelBar()
           // await timeout(1000)
           resultForGameOver = map.isBoardMatch(map.getCurrentMap())
