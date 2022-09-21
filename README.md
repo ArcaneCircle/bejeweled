@@ -17,13 +17,6 @@ Bejeweled board game clon for Delta Chat
 
 - 📦 Automatically minify, build and release your `.xdc` file
 
-## Pre-packed
-
-### Plugins
-
-- [`unplugin-auto-import`](https://github.com/antfu/unplugin-auto-import) - Directly use react/react-router-dom API and others without importing
-- [usehooks-ts](https://usehooks-ts.com/) - collection of useful React hooks
-
 ## Usage
 
 ### Installing Dependecies
