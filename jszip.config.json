@@ -10,6 +10,7 @@
   "force": true,
   "ignoreEntries": [
     "*.map",
+    "*~",
     "dist/package.xdc"
   ],
   "mode": "add",

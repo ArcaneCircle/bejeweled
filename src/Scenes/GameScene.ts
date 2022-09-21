@@ -44,7 +44,7 @@ export default class GameScene extends Phaser.Scene {
   create() {
     this.cameras.main.setBackgroundColor('#000')
     levelBarImg = this.add.image(INITIAL_BOARD_SCREEN.WIDTH + 120, 1260 + 100, 'LevelBar').setDepth(1).setOrigin(0, 0)
-    this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 70, 'backgroundBoard').setDepth(1).setOrigin(0.5, 0)
+    this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 70, 'backgroundBoard').setDepth(1).setOrigin(0.5, 0).setAlpha(0.7)
     this.add.image(this.cameras.main.centerX, INITIAL_BOARD_SCREEN.HEIGHT - 90, 'Border').setDepth(1).setOrigin(0.5, 0)
 
     const newLocal = 'bold 72px Calibri'

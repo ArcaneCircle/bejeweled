@@ -26,7 +26,7 @@ export default class MenuScene extends Phaser.Scene {
     this.add.text(1350, 700, scoreArr, { font: 'bold 70px monospace', align: 'right' }).setDepth(1).setOrigin(1, 0)
 
     // Add play text
-    const text = this.add.text(this.cameras.main.centerX, BACKGROUND.HEIGHT - 200, 'click to play', { font: 'bold 53px monospace', color: '#c94cb1' }).setDepth(1).setOrigin(0.5)
+    const text = this.add.text(this.cameras.main.centerX, BACKGROUND.HEIGHT - 200, 'click to play', { font: 'bold 53px monospace', color: '#ec5713' }).setDepth(1).setOrigin(0.5)
     TweenHelper.flashElement(this, text)
 
     this.input.on('pointerup', () => {
