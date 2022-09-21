@@ -1,9 +1,11 @@
 {
+  "name": "dejeweled",
+  "version": "1.1.3",
   "private": true,
   "packageManager": "pnpm@7.3.0",
   "scripts": {
     "build": "vite build && jszip-cli -c jszip.config.json",
-    "release": "npm run versions && npm run git && pnpm build",
+    "release": "npm version patch && npm run versions && npm run git && pnpm build",
     "versions": "rr 'name = .+' '\"name = Dejeweled v\" + r(\"package\").version' -j manifest.toml && rr 'name = (.+)' 'name = \"$1\"' manifest.toml",
     "git": "git add manifest.toml && git commit -m 'update game version'",
     "lint": "eslint .",
