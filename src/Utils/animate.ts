@@ -2,11 +2,18 @@
  * https://www.stephengarside.co.uk/blog/phaser-3-flashing-text-easy-example/
  */
 export default class TweenHelper {
-  static flashElement(scene, element, repeat = true, easing = 'Linear', overallDuration = 1200, visiblePauseDuration = 300) {
+  static flashElement(
+    scene,
+    element,
+    repeat = true,
+    easing = "Linear",
+    overallDuration = 1200,
+    visiblePauseDuration = 300,
+  ) {
     if (scene && element) {
-      const flashDuration = overallDuration - visiblePauseDuration / 2
+      const flashDuration = overallDuration - visiblePauseDuration / 2;
 
-      scene.tweens.timeline({
+      scene.add.timeline({
         tweens: [
           {
             targets: element,
@@ -32,12 +39,11 @@ export default class TweenHelper {
             alpha: 0.3,
             ease: easing,
             onComplete: () => {
-              if (repeat === true)
-                this.flashElement(scene, element)
+              if (repeat === true) this.flashElement(scene, element);
             },
           },
         ],
-      })
+      });
     }
   }
 }

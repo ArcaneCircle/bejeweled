@@ -3,6 +3,7 @@
 .vite-ssg-temp
 *.local
 dist
+dist-xdc
 dist-ssr
 html
 node_modules

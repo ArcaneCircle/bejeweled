@@ -1,23 +1,25 @@
-import GameScene from './Scenes/GameScene'
-import MenuScene from './Scenes/MenuScene'
-import './phaser-core.min.js'
+import "./app.css";
 
-window.highscores.init('Dejeweled')
+import "@webxdc/highscores";
+
+import GameScene from "./Scenes/GameScene";
+import MenuScene from "./Scenes/MenuScene";
+import Phaser from "phaser";
 
 export const config = {
   type: Phaser.AUTO,
   scale: {
     mode: Phaser.Scale.FIT,
-    parent: 'bejeweled-game',
+    parent: "bejeweled-game",
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: 1440,
     height: 1920,
-    backgroundColor: '#df8e73',
+    backgroundColor: "#df8e73",
   },
   physics: {
-    default: 'arcade',
+    default: "arcade",
   },
   scene: [MenuScene, GameScene],
-}
+};
 
-export const game = new Phaser.Game(config)
+window.highscores.init().then(() => new Phaser.Game(config));
