@@ -2,7 +2,6 @@
 
 Bejeweled board game clon for Delta Chat
 
-
 ## Contributing
 
 ### Installing Dependencies
