@@ -6,7 +6,7 @@ Bejeweled board game clon for Delta Chat
 
 ### Installing Dependencies
 
-After cloning this repo, install dependecies:
+After cloning this repo, install dependencies:
 
 ```
 pnpm i
